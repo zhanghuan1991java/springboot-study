@@ -1,0 +1,5 @@
+1、启动类上增加注解：@ServletComponentScan
+
+2、Filter、Listener、Servlet 分别对应增加注解：
+	@WebFilter("/*")、@WebListener、@WebServlet("/my")
+	

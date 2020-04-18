@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.didispace.cache.ehcache.EmployeesCacheMapper">
+
+    <resultMap id="EmployeesMap" type="com.didispace.mybatis.employees.bean.Employees">
+        <result column="EMPLOYEE_ID" property="employeeID" jdbcType="VARCHAR" />
+        <result column="FIRST_NAME" property="firstName" jdbcType="VARCHAR" />
+        <result column="LAST_NAME" property="lastName" jdbcType="VARCHAR" />
+        <result column="EMAIL" property="email" jdbcType="VARCHAR"/>
+        <result column="PHONE_NUMBER" property="phoneNumber" jdbcType="VARCHAR"/>
+        <result column="HIRE_DATE" property="hireDate" jdbcType="VARCHAR"/>
+        <result column="JOB_ID" property="jobID" jdbcType="VARCHAR"/>
+        <result column="SALARY" property="salary" jdbcType="DECIMAL"/>
+        <result column="COMMISSION_PCT" property="commissionPct" jdbcType="DECIMAL"/>
+        <result column="MANAGER_ID" property="managerID" jdbcType="INTEGER"/>
+        <result column="DEPARTMENT_ID" property="departmentID" jdbcType="INTEGER"/>
+    </resultMap>
+    
+    
+    <select id="getCacheByID" resultMap="EmployeesMap" parameterType="String" >
+     		select * from employees e where  e.employee_id = #{employeeID,jdbcType=VARCHAR}
+    </select>
+    
+    
+    </mapper>

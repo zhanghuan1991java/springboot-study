@@ -1,0 +1,10 @@
+读取配置文件中的常量：
+
+
+@Configuration
+@ConfigurationProperties(prefix="com.test")
+@PropertySource(value="classpath:personal.properties")
+
+
+拷贝对象里的内容
+BeanUtils.copyProperties(person, bean);

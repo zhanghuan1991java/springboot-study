@@ -1,0 +1,6 @@
+返回json格式的字符串：
+1、使用原始的  @Controller  + @ResponseBody
+
+2、使用  @RestController
+
+3、不想返回某个字段，加上注释：	@JsonIgnore

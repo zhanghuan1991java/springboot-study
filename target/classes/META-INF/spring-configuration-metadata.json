@@ -1,0 +1,20 @@
+{
+  "groups": [{
+    "name": "com.test",
+    "type": "com.didispace.properties.Person",
+    "sourceType": "com.didispace.properties.Person"
+  }],
+  "properties": [
+    {
+      "name": "com.test.age",
+      "type": "java.lang.String",
+      "sourceType": "com.didispace.properties.Person"
+    },
+    {
+      "name": "com.test.name",
+      "type": "java.lang.String",
+      "sourceType": "com.didispace.properties.Person"
+    }
+  ],
+  "hints": []
+}
