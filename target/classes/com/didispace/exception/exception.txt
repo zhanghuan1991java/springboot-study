@@ -1,8 +1,0 @@
-统一处理全局异常
-
-
-@ControllerAdvice
-
-		@ExceptionHandler(value = Exception.class)
-		public Object errorHandler(HttpServletRequest request ,HttpServletResponse response ,Exception e)  throws Exception {
-		

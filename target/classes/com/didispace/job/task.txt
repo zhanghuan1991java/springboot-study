@@ -1,9 +1,0 @@
-设置定时任务，在启动类上增加注解：@EnableScheduling
-
-
-	/**
-	 * Linux 的cron表达式   ：                    分  时  天  月 周
-	 * 
-	 * springboot批量的cron表达式：秒    分   时  天  月 周
-	 */
-	@Scheduled(cron="* */5 * * * *")
