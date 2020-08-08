@@ -1,0 +1,14 @@
+1/  实体Bean
+
+2/  编写mapper.xml文件
+
+3/  application.properties中配置mapper.xml文件位置：
+    mybatis.mapper-locations=classpath:mybatis/mapper/*.xml
+
+4/  编写mapper接口，方法名与mapper.xml里面的id一一对应
+
+5/  启动类增加如下配置：扫描mapper接口
+    @MapperScan({"com.didispace.mybatis.employees.mapper","com.didispace.cache.ehcache","com.didispace.mybatis.a_user"})
+
+6/  设置sql语句打印，mapper接口所在的包名。
+    logging.level.com.didispace.mybatis.a_user=DEBUG
