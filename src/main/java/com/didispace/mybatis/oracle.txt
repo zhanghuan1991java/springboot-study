@@ -1,7 +1,7 @@
 1、mapper所在的包名一定要配在启动程序的@MapperScan里面  ，注意是包名，不是类名。
      @MapperScan({"com.didispace.mapper","com.didispace.employees.mapper"})
 
-2、mapper的方法 名  直接映射 mybatis     的配置文件。
+2、mapper的方法名  直接映射 mybatis     的配置文件。
 
 3、sql打印   ，配置 mapper所在的包路径：
 		logging.level.com.didispace.mybatis.employees.mapper=debug

@@ -10,7 +10,7 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 @SpringBootApplication
 @ServletComponentScan
 @EnableScheduling
-@MapperScan({"com.didispace.mybatis.employees.mapper","com.didispace.cache.ehcache"})
+@MapperScan({"com.didispace.mybatis.employees.mapper","com.didispace.cache.ehcache","com.didispace.mybatis.a_user"})
 @EnableCaching
 public class Application {
 	

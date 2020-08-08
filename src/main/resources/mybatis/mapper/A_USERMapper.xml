@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.didispace.mybatis.a_user.A_USER_Mapper">
+
+    <resultMap id="singleUser" type="com.didispace.mybatis.a_user.A_USER">
+        <result column="ID" property="id" jdbcType="VARCHAR" />
+        <result column="NAME" property="name" jdbcType="VARCHAR" />
+        <result column="OTHER_NAME" property="other_name" jdbcType="VARCHAR" />
+        <result column="PHONE" property="phone" jdbcType="VARCHAR"/>
+        <result column="ADDR" property="addr" jdbcType="VARCHAR"/>
+        <result column="IDENTITY_CODE" property="identity_code" jdbcType="VARCHAR"/>
+        <result column="CREATE_TIME" property="create_time" jdbcType="VARCHAR"/>
+        <result column="UPDATE_TIME" property="update_time" jdbcType="DECIMAL"/>
+    </resultMap>
+
+    <select id="selectUserById" resultMap="singleUser" parameterType="String" >
+        select * from a_user e where 1=1
+        <if test="id != null  and id !=''">
+            and e.id = #{id}
+        </if>
+        and rownum &lt; 10
+    </select>
+
+    <select id="selectUserByName" resultMap="singleUser" parameterType="String" >
+        select * from a_user e where 1=1
+        <if test="name != null  and name !=''">
+            and e.name = #{id}
+        </if>
+        and rownum &lt; 10
+    </select>
+
+
+</mapper>
