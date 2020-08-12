@@ -10,5 +10,5 @@ public interface A_USER_Mapper {
 
     public  A_USER selectUserByName(@Param("name") String name);
 
-
+    public Integer insertUser(@Param("user") A_USER user);
 }
