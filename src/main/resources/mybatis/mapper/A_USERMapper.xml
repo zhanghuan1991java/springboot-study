@@ -39,7 +39,7 @@
 
     <insert id="insertUser" parameterType="com.didispace.mybatis.a_user.A_USER">
         insert into SYSTEM.A_USER(id,name,other_name,phone,addr,identity_code)
-        values (a_user_id.nextval,#{user.name},#{user.other_name},#{user.phone},#{user.addr},#{user.identity_code})
+        values (a_user_id.nextval,#{user.name,jdbcType=VARCHAR},#{user.other_name,jdbcType=VARCHAR},#{user.phone,jdbcType=VARCHAR},#{user.addr,jdbcType=VARCHAR},#{user.identity_code,jdbcType=VARCHAR})
     </insert>
 
 </mapper>
