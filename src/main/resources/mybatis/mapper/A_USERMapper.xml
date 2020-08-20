@@ -10,7 +10,7 @@
         <result column="ADDR" property="addr" jdbcType="VARCHAR"/>
         <result column="IDENTITY_CODE" property="identity_code" jdbcType="VARCHAR"/>
         <result column="CREATE_TIME" property="create_time" jdbcType="VARCHAR"/>
-        <result column="UPDATE_TIME" property="update_time" jdbcType="DECIMAL"/>
+        <result column="UPDATE_TIME" property="update_time" jdbcType="VARCHAR"/>
     </resultMap>
 
     <select id="selectUserById" resultMap="singleUser" parameterType="String" >
@@ -41,5 +41,33 @@
         insert into SYSTEM.A_USER(id,name,other_name,phone,addr,identity_code)
         values (a_user_id.nextval,#{user.name,jdbcType=VARCHAR},#{user.other_name,jdbcType=VARCHAR},#{user.phone,jdbcType=VARCHAR},#{user.addr,jdbcType=VARCHAR},#{user.identity_code,jdbcType=VARCHAR})
     </insert>
+
+    <!-- 分页公共头语句-->
+    <sql id="pageHead">
+        select * from(
+            select t.*, rownum list from (
+    </sql>
+
+    <!-- 分页公共尾语句-->
+    <sql id="pageTail">
+         ) t) m
+        where m.list &lt; #{page.max,jdbcType=INTEGER}
+          and m.list &gt;= #{page.min,jdbcType=INTEGER}
+    </sql>
+
+    <!-- 直接使用 java 对象来映射表-->
+    <select id="getAllUser" resultType="com.didispace.mybatis.a_user.A_USER" parameterType="com.didispace.mybatis.pageInfo.Page" >
+        <include refid="pageHead"/>
+        select * from a_user e order by e.CREATE_TIME desc
+        <include refid="pageTail"/>
+    </select>
+
+
+
+
+
+
+
+
 
 </mapper>
