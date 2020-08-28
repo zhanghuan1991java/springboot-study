@@ -1,0 +1,15 @@
+1/ 注意，若controller使用对象  接收  数据，   必须在  html标签 指定  对象，及  成员
+
+    特别注意： form 需要指定对象  th:object="${user}
+              input 必须有name  属性， 否则无法传值。
+
+
+
+2/ devtools可以实现页面热部署（即页面修改后会立即生效，这个可以直接在application.properties文件中配置spring.thymeleaf.cache=false来实现）
+
+
+3/   特别需要注意 路径的写法：
+    #模板文件位置
+    spring.thymeleaf.prefix=classpath:/templates
+
+    modelAndView ，里面全部使用  /开头的绝对路径

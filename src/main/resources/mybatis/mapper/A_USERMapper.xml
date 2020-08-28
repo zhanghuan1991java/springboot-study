@@ -45,7 +45,7 @@
     <!-- 分页公共头语句-->
     <sql id="pageHead">
         select * from(
-            select t.*, rownum list from (
+            select t.*, rownum-1 list from (
     </sql>
 
     <!-- 分页公共尾语句-->
@@ -55,11 +55,16 @@
           and m.list &gt;= #{page.min,jdbcType=INTEGER}
     </sql>
 
-    <!-- 直接使用 java 对象来映射表-->
+    <!-- 直接使用 java 对象来映射表  ,分页查询  user 表-->
     <select id="getAllUser" resultType="com.didispace.mybatis.a_user.A_USER" parameterType="com.didispace.mybatis.pageInfo.Page" >
         <include refid="pageHead"/>
         select * from a_user e order by e.CREATE_TIME desc
         <include refid="pageTail"/>
+    </select>
+
+    <!-- 获取  user 表   总数据条数 -->
+    <select id="getCountNum" resultType="INTEGER">
+        select count(*) from a_user
     </select>
 
 

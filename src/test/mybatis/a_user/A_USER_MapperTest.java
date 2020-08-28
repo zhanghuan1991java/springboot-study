@@ -1,7 +1,7 @@
 import com.didispace.Application;
 import com.didispace.mybatis.a_user.A_USER;
 import com.didispace.mybatis.a_user.A_USER_Mapper;
-
+import com.didispace.mybatis.pageInfo.Page;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -10,6 +10,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 
 @RunWith(SpringRunner.class)
@@ -45,4 +47,17 @@ public class A_USER_MapperTest {
         Assert.assertEquals(1,1);
     }
 
+    @Test
+    public void getAllUser() {
+        Page page = new Page();
+        List<A_USER> list = mapper.getAllUser(page);
+        Assert.assertNotNull(list);
+    }
+
+    @Test
+    public void getCountNum() {
+        Integer ret = mapper.getCountNum();
+        System.out.println("user表总数据条数:"+ret);
+        Assert.assertNotNull(ret);
+    }
 }

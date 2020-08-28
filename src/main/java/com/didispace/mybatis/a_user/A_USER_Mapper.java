@@ -16,4 +16,6 @@ public interface A_USER_Mapper {
     public Integer insertUser(@Param("user") A_USER user);
 
     public List<A_USER> getAllUser(@Param("page") Page page);
+
+    public Integer getCountNum();
 }
