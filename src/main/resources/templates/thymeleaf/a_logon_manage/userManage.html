@@ -3,10 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>用户管理界面</title>
-
-    <link th:href="@{/static/css/bootstrap-combined.min.css}" rel="stylesheet" />
-    <link th:href="@{/static/css/layoutit.css}" rel="stylesheet" />
-
+    <script src="/static/js/common_head.js"></script>
 </head>
 <body>
 <!--  从可视化布局粘贴出来的代码  start-->
@@ -62,22 +59,24 @@
                 </div>
             </div>
 
-            <div id="userAlert" class="alert">
+            <div id="userAlert" th:class="${retMsg == null }?'hide':'alert alert-success'">
                 <button type="button" class="close" data-dismiss="alert">×</button>
-                <strong>警告!</strong> 请注意你的个人隐私安全.
+                <strong>提示!</strong>
+                <p th:text="${retMsg}"></p>
             </div>
 
             <div class="row-fluid">
                 <div class="span12">
                     <form class="form-search" action="/queryUser">
-                        <input id="searchId" name="searchId" class="input-medium search-query" type="text" />
-                        <button type="submit" class="btn">查询</button>
+                        <input id="searchId" name="searchId" class="input-lg search-query" type="text" />
+                        <button type="submit" class="btn btn-default">查询</button>
                     </form>
+
                     <div class="btn-group">
                         <div class="btn-group" role="group" aria-label="...">
-                            <button type="button" class="btn">新增</button>
-                            <button type="button" class="btn">删除</button>
-                            <button type="button" class="btn">导入</button>
+                            <button type="button" class="btn btn-default" id="insert">新增</button>
+                            <!--<a class="btn btn-default" href="/user_register_html" role="button">新增(&lt;a herf&gt;跳转)</a>-->
+                            <button type="button" class="btn btn-default">导入</button>
                         </div>
                     </div>
                     <p>
@@ -111,7 +110,9 @@
                                 <td th:text="${user.identity_code}"></td>
                                 <td th:text="${user.create_time}"></td>
                                 <td th:text="${user.update_time}"></td>
-                                <td><a th:href="@{/delete(id=${user.id})}"><button type="button" class="btn btn-info btn-xs">删除</button></a></td>
+                                <td><a th:href="@{/deleteUser(id=${user.id},name=${user.name})}" class="del-btn">
+                                    <button type="button" class="btn btn-default">删除</button></a>
+                                </td>
                             </tr>
                         </div>
                         <!--
@@ -146,7 +147,7 @@
                             </li>
 
                             <!--中间页-->
-                            <li th:each="pageNum:${#numbers.sequence(min,max)}"  th:class="${pageNum eq pageIndex}?'page-item active'">
+                            <li th:each="pageNum:${#numbers.sequence(min,max)}"  th:class="${pageNum eq pageIndex}?'active'">
                                 <a th:text="${pageNum+1}" th:href="@{/queryPageUser/}+${pageNum}"></a>
                             </li>
 
@@ -165,17 +166,25 @@
 </div>
 
 <!--  从可视化布局粘贴出来的代码  end-->
-<script type="text/javascript" th:src="@{/static/js/jquery-2.0.0.min.js}"></script>
-<script type="text/javascript" th:src="@{/static/js/bootstrap.min.js}"></script>
-<script type="text/javascript" th:src="@{/static/js/jquery-ui.js}"></script>
+<script src="/static/js/common_footer.js"></script>
 
 <script type="text/javascript">
     $(function(){
         /*hide alert div*/
-        $("#userAlert").addClass("hide");
+        // $("#userAlert").addClass("hide");
 
-
-
+        //insert button  ajax跳转到注册页面
+        $('#insert').on('click',function () {
+            $.ajax({
+                url:"/user_register_html",
+                // data:{},
+                async:false,
+                type:"POST",
+                success:function (data) {
+                    window.location.href = '/user_register_html';
+                }
+            });
+        });
     });
 </script>
 
