@@ -67,7 +67,9 @@
         select count(*) from a_user
     </select>
 
-
+    <delete id="deleteUserById" parameterType="String">
+        delete a_user e where e.id = #{id}
+    </delete>
 
 
 

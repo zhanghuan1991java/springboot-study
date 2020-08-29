@@ -18,4 +18,6 @@ public interface A_USER_Mapper {
     public List<A_USER> getAllUser(@Param("page") Page page);
 
     public Integer getCountNum();
+
+    public void deleteUserById(@Param("id") String id);
 }

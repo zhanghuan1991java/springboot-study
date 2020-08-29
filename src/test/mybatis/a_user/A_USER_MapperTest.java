@@ -31,7 +31,7 @@ public class A_USER_MapperTest {
 
     @Test
     public void selectByName() {
-        A_USER user = mapper.selectUserByName("zhanghuan");
+        A_USER user = mapper.selectUserByName("zh123sdf");
         Assert.assertNotNull(user);
     }
 
@@ -59,5 +59,11 @@ public class A_USER_MapperTest {
         Integer ret = mapper.getCountNum();
         System.out.println("user表总数据条数:"+ret);
         Assert.assertNotNull(ret);
+    }
+
+    @Test
+    public void deleteById() {
+        mapper.deleteUserById("202008081520000100020");
+
     }
 }
