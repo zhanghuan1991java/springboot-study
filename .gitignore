@@ -1,7 +1,9 @@
 /target/
 .idea
+.project
 .factorypath
 .classpath
 .settings
 springboot-study.iml
+springboot-study.log*
 springboot-study.log

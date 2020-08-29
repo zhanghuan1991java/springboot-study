@@ -36,7 +36,7 @@
                             用户注册
                         </h3>
                         <!-- 注意，若controller使用对象  接收  数据，   必须在  html标签 指定  对象，及  成员-->
-                        <form class="form-horizontal" action="/registerUser1" method="post" th:object="${user}">
+                        <form class="form-horizontal" action="/registerUserByForm" method="post" th:object="${user}">
                             <div class="control-group">
                                 <label class="control-label" for="name" >用户名</label>
                                 <div class="controls">
@@ -67,7 +67,8 @@
                                     <input id="other_name" type="text" name="other_name"/>
                                 </div>
                             </div>
-                            <button class="btn btn-success" type="submit">登录</button>
+                            <button class="btn btn-success" type="submit">注册1(form表单)</button>
+                            <button id="registerUser" class="btn btn-success">注册2(ajax拼接json)</button>
                         </form>
 
 
@@ -80,6 +81,30 @@
 
 
     <script type="text/javascript">
+        $(function () {
+
+            /*拼接ajax数据，进行用户注册  start*/
+            $('#registerUser').on('click',function () {
+                $.ajax({
+                    url:"/registerUserByJson",
+                    data:{
+                        name:$('#name').val(),
+                        identity_code:$('#identity_code').val(),
+                        phone:$('#phone').val(),
+                        addr:$('#addr').val(),
+                        other_name:$('#other_name').val()
+                        },
+                    async:false,
+                    contentType: "application/json",
+                    type:"POST",
+                    success:function (data) {
+                    }
+                });
+            });
+            /*拼接ajax数据，进行用户注册  end*/
+
+        });
+
     </script>
 
 

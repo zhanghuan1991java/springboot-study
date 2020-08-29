@@ -23,69 +23,88 @@ public class A_USER_html_Controller {
     private A_USER_Mapper mapper;
 
     /**
-     * 主页面
+     * 用户管理主页面
      * @return
      */
-    @RequestMapping(value = "/main")
-    public ModelAndView main() {
+    @RequestMapping(value = "/userIndex")
+    public ModelAndView userIndex() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("/thymeleaf/a_logon_manage/userManage");
+        return mv;
+    }
+
+    /**
+     * 用户管理主页面
+     * @return
+     */
+    @RequestMapping(value = "/userPage")
+    public ModelAndView userPage() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("/thymeleaf/a_logon_manage/userManage");
+        return mv;
+    }
+    /**
+     * 用户注册页面
+     * @return
+     */
+    @RequestMapping(value = "/user_register_html")
+    public ModelAndView user_register_html() {
 
         ModelAndView mv = new ModelAndView();
 
-        mv.setViewName("/thymeleaf/a_logon_manage/main");
+        mv.setViewName("/thymeleaf/a_logon_manage/userRegister");
 
         return mv;
     }
 
     /**
      * 使用对象  接收  form表单的post 请求
+     * 注册1按钮
      * @param user
      * @return
      */
-    @RequestMapping(value = "/registerUser1",method = RequestMethod.POST)
-    public ModelAndView registerUser1(@ModelAttribute(value = "user") A_USER user) {
+    @RequestMapping(value = "/registerUserByForm",method = RequestMethod.POST)
+    public ModelAndView registerUserByForm(@ModelAttribute(value = "user") A_USER user) {
 
         int ret = mapper.insertUser(user);
-        logger.info("newUser...新增条数:" +ret);
-        ModelAndView mv = new ModelAndView();
-        mv.addObject("retMsg", "注册成功!");
-        mv.setViewName("/success");
+        logger.info("registerUserByForm -------newUser...新增条数:" +ret);
 
+        //查询新增的用户信息到界面 start
+        ModelAndView mv = queryUser("",new Page());
+        mv.addObject("retMsg", "用户["+user.getName()+"]注册成功!");
+        //查询新增的用户信息到界面 end;
+
+        mv.setViewName("/thymeleaf/a_logon_manage/userManage");
         return mv;
     }
 
     /**
      *  页面未使用 ，测试类使用
+     *  注册2按钮
      * 使用Json串接受  from 表单的 post请求
      * @param userStr
      * @return
      */
-    @RequestMapping(value = "/registerUser",method = RequestMethod.POST)
-    public ModelAndView registerUser(@RequestBody String userStr) {
-        logger.info("userstr" +"————>"+ userStr);
+    @RequestMapping(value = "/registerUserByJson",method = RequestMethod.POST)
+    public ModelAndView registerUserByJson(@RequestBody String userStr) {
+        logger.info("user json str————>"+ userStr);
 
         A_USER userObject = JSONObject.parseObject(userStr,A_USER.class);
 
         int ret = mapper.insertUser(userObject);
-        logger.info("newUser...新增条数:" +ret);
-        ModelAndView mv = new ModelAndView();
-        mv.addObject("retMsg", "注册成功!");
-        mv.setViewName("/success");
+        logger.info("registerUserByJson--------newUser...新增条数:" +ret);
+
+        //查询新增的用户信息到界面 start
+        ModelAndView mv = queryUser("",new Page());
+        mv.addObject("retMsg", "用户["+userObject.getName()+"]注册成功!");
+        //查询新增的用户信息到界面 end;
+
+        mv.setViewName("/thymeleaf/a_logon_manage/userManage");
         return mv;
     }
 
     /**
-     * 用户查询
-     * @return
-     */
-    @RequestMapping(value = "/userPage")
-    public ModelAndView userPage() {
-        ModelAndView mv = new ModelAndView();
-        mv.setViewName("/thymeleaf/a_logon_manage/queryUser");
-        return mv;
-    }
-
-    /**
-     * 用户查询
+     * 输入框，  用户查询
      * @return
      */
     @RequestMapping(value = "/queryUser")
@@ -106,7 +125,7 @@ public class A_USER_html_Controller {
 
         mv.addObject("userList",userList);
 
-        mv.setViewName("/thymeleaf/a_logon_manage/queryUser");
+        mv.setViewName("/thymeleaf/a_logon_manage/userManage");
 
         return mv;
     }
@@ -133,7 +152,7 @@ public class A_USER_html_Controller {
 
         mv.addObject("userList",userList);
 
-        mv.setViewName("/thymeleaf/a_logon_manage/queryUser");
+        mv.setViewName("/thymeleaf/a_logon_manage/userManage");
 
         return mv;
     }
@@ -184,4 +203,17 @@ public class A_USER_html_Controller {
         return userList;
     }
 
+    @RequestMapping(value = "/deleteUser",method = RequestMethod.GET)
+    public ModelAndView deleteUser(@RequestParam String id,String name) {
+        logger.info("input params:————> id---"+ id +",name————>"+name);
+        mapper.deleteUserById(id);
+
+        //查询新增的用户信息到界面 start
+        ModelAndView mv = queryUser("",new Page());
+        mv.addObject("retMsg", "用户["+name+"]删除成功!");
+        //查询新增的用户信息到界面 end;
+
+        mv.setViewName("/thymeleaf/a_logon_manage/userManage");
+        return mv;
+    }
 }

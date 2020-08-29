@@ -12,7 +12,7 @@ import org.springframework.web.client.RestTemplate;
 @SpringBootApplication
 @ServletComponentScan
 @EnableScheduling
-@MapperScan({"com.didispace.mybatis.employees.mapper","com.didispace.cache.ehcache","com.didispace.mybatis.a_user"})
+@MapperScan({"com.didispace.cache.ehcache","com.didispace.mybatis.a_user"})
 @EnableCaching
 public class Application {
 	
