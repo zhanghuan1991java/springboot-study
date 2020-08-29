@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"></meta>
+    <title>成功提醒</title>
+    <script src="/static/js/common_head.js"></script>
+</head>
+<body>
+<!--  从可视化布局粘贴出来的代码  start-->
+    <div class="container-fluid">
+        <div class="row-fluid">
+            <div class="span12">
+                <div class="alert alert-success">
+                    <button type="button" class="close" data-dismiss="alert">×</button>
+                    <h4>
+                        提示!
+                    </h4>
+                    <p th:text="${retMsg}"></p>
+                </div>
+            </div>
+        </div>
+    </div>
+<!--  从可视化布局粘贴出来的代码  end-->
+<script src="/static/js/common_footer.js"></script>
+</body>
+</html>

@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>用户注册界面</title>
+
+    <link th:href="@{/static/css/bootstrap-combined.min.css}" rel="stylesheet" />
+    <link th:href="@{/static/css/layoutit.css}" rel="stylesheet" />
+
+</head>
+<body>
+
+    <!--  从可视化布局粘贴出来的代码  start-->
+    <div class="container-fluid">
+        <div class="row-fluid">
+            <div class="span12">
+                <div class="row-fluid">
+                    <div class="span6">
+                        <div class="hero-unit">
+                            <p>
+                                一种风，只流浪在一座山谷；
+                            </p>
+                            <p>
+                                一道堤，只护住一湾星河。
+                            </p>
+                            <p>
+                                每次仰望星空，我总是闭上眼，
+                            </p>
+                            <p>
+                                因为最美的一颗不在天上。
+                            </p>
+                        </div>
+                    </div>
+                    <div class="span6">
+                        <h3 class="text-left">
+                            用户注册
+                        </h3>
+                        <!-- 注意，若controller使用对象  接收  数据，   必须在  html标签 指定  对象，及  成员-->
+                        <form class="form-horizontal" action="/registerUser1" method="post" th:object="${user}">
+                            <div class="control-group">
+                                <label class="control-label" for="name" >用户名</label>
+                                <div class="controls">
+                                    <input id="name" type="text" name="name"/>
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <label class="control-label" for="identity_code" >身份证号</label>
+                                <div class="controls">
+                                    <input id="identity_code" type="text" name="identity_code"/>
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <label class="control-label" for="phone" >手机号</label>
+                                <div class="controls">
+                                    <input id="phone" type="text" name="phone"/>
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <label class="control-label" for="addr" >地址</label>
+                                <div class="controls">
+                                    <input id="addr" type="text" name="addr" />
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <label class="control-label" for="other_name" >别名</label>
+                                <div class="controls">
+                                    <input id="other_name" type="text" name="other_name"/>
+                                </div>
+                            </div>
+                            <button class="btn btn-success" type="submit">登录</button>
+                        </form>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--  从可视化布局粘贴出来的代码  end-->
+
+
+    <script type="text/javascript">
+    </script>
+
+
+    <script type="text/javascript" th:src="@{/static/js/jquery-2.0.0.min.js}"></script>
+    <script type="text/javascript" th:src="@{/static/js/bootstrap.min.js}"></script>
+    <script type="text/javascript" th:src="@{/static/js/jquery-ui.js}"></script>
+</body>
+</html>
