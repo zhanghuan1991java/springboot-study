@@ -111,7 +111,7 @@ spring.thymeleaf.check-template-location=true
 spring.thymeleaf.encoding=UTF-8
 
 #模板文件位置
-spring.thymeleaf.prefix=classpath:/templates/
+spring.thymeleaf.prefix=classpath:/templates
 
 #Content-Type配置
 spring.thymeleaf.servlet.content-type=text/html
