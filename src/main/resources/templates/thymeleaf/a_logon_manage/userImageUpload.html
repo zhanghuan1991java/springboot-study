@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>用户图片上传界面</title>
+    <script src="/static/js/common_head.js"></script>
+
+</head>
+<body>
+<!--  从可视化布局粘贴出来的代码  start-->
+<!--
+<div class="container">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h3>基本演示（支持jpg、gif、txt、png和pdf格式文件）</h3>
+                <input type="file" multiple id="ssi-upload"/>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <h3>无预览图效果：</h3>
+                <input type="file" multiple id="ssi-upload2"/>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <h3>不带拖放区域：</h3>
+                <input type="file" multiple id="ssi-upload3"/>
+            </div>
+        </div>
+    </div>
+</div>-->
+
+
+<div class="container-fluid">
+    <div class="row-fluid">
+        <div class="span12">
+            <div class="row-fluid">
+                <div class="span4">
+                </div>
+                <div class="span4">
+                    <form class="form-search form-inline" method="post" enctype="multipart/form-data">
+                        请选择图片：
+                        <input id="uploadFile" class="input-lg search-query" type="file" value="选择"/>
+                    </form>
+                    <div id = "showImage" >
+                        <image id="showFile"/>
+                    </div>
+                    <button class="btn btn-block btn-default" type="submit">上传</button>
+                </div>
+                <div class="span4">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!--  从可视化布局粘贴出来的代码  end-->
+<script src="/static/js/common_footer.js"></script>
+
+<script type="text/javascript">
+    $(function(){
+        $("#uploadFile").on("change",function (data) {
+            $('#showFile').attr("src",window.URL.createObjectURL($(this)[0].files.item(0)));
+        });
+
+    });
+</script>
+
+</body>
+</html>
