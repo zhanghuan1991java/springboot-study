@@ -8,30 +8,6 @@
 </head>
 <body>
 <!--  从可视化布局粘贴出来的代码  start-->
-<!--
-<div class="container">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12">
-                <h3>基本演示（支持jpg、gif、txt、png和pdf格式文件）</h3>
-                <input type="file" multiple id="ssi-upload"/>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-12">
-                <h3>无预览图效果：</h3>
-                <input type="file" multiple id="ssi-upload2"/>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-12">
-                <h3>不带拖放区域：</h3>
-                <input type="file" multiple id="ssi-upload3"/>
-            </div>
-        </div>
-    </div>
-</div>-->
-
 
 <div class="container-fluid">
     <div class="row-fluid">
@@ -40,14 +16,15 @@
                 <div class="span4">
                 </div>
                 <div class="span4">
-                    <form class="form-search form-inline" method="post" enctype="multipart/form-data">
-                        请选择图片：
-                        <input id="uploadFile" class="input-lg search-query" type="file" value="选择"/>
-                    </form>
                     <div id = "showImage" >
                         <image id="showFile"/>
                     </div>
-                    <button class="btn btn-block btn-default" type="submit">上传</button>
+                    <form class="form-search form-inline" method="post" enctype="multipart/form-data" action="/uploadImage">
+                        请选择图片：
+                        <input id="file" class="input-lg search-query" type="file" name="file"/>
+                        <button id="upload" class="btn btn-block btn-default" type="submit">上传</button>
+                    </form>
+
                 </div>
                 <div class="span4">
                 </div>
@@ -62,9 +39,24 @@
 
 <script type="text/javascript">
     $(function(){
-        $("#uploadFile").on("change",function (data) {
+        $("#file").on("change",function (data) {
+            //Chrome浏览器的写法，   不考虑其他浏览器
             $('#showFile').attr("src",window.URL.createObjectURL($(this)[0].files.item(0)));
         });
+
+        //上传按钮
+        // $("#upload").on("click",function (data) {
+        //     $.ajax({
+        //         url:"/uploadImage",
+        //         data:{},
+        //         async:false,
+        //         type:"POST",
+        //         success:function (data) {
+        //             window.location.href = '/user_register_html';
+        //         }
+        //     });
+        // });
+
 
     });
 </script>

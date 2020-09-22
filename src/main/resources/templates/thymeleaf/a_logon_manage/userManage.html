@@ -75,7 +75,6 @@
                     <div class="btn-group">
                         <div class="btn-group" role="group" aria-label="...">
                             <button type="button" class="btn btn-default" id="insert">新增</button>
-                            <a class="btn btn-default" href="/upload_image_html" role="button">图片上传</a>
                             <a id="modal-684569" href="#modal-container-684569" role="button" class="btn" data-toggle="modal">弹框</a>
                         </div>
                     </div>
@@ -111,7 +110,9 @@
                                 <td th:text="${user.create_time}"></td>
                                 <td th:text="${user.update_time}"></td>
                                 <td><a th:href="@{/deleteUser(id=${user.id},name=${user.name})}" class="del-btn">
-                                    <button type="button" class="btn btn-default">删除</button></a>
+                                       <button type="button" class="btn btn-default">删除</button>
+                                    </a>
+                                    <a class="btn btn-default" th:href="@{/upload_image_html/}+${user.id}" role="button">图片上传</a>
                                 </td>
                             </tr>
                         </div>

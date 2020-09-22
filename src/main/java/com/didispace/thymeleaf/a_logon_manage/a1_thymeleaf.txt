@@ -13,3 +13,5 @@
     spring.thymeleaf.prefix=classpath:/templates
 
     modelAndView ，里面全部使用  /开头的绝对路径
+
+4/ 常量加变量  th:href="@{/upload_image_html/}+${user.id}"
