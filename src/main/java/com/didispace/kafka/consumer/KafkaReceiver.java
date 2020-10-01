@@ -7,11 +7,11 @@ import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.stereotype.Component;
 
 @Component
-   public class KafkaReceiver {
-       private static final Logger logger = LoggerFactory.getLogger(KafkaReceiver.class);
-   
-       @KafkaListener(topics = "java-topic")
-       public void listen(@Payload String message){
-           logger.info("received message={}",message);
-       }
+public class KafkaReceiver {
+   private static final Logger logger = LoggerFactory.getLogger(KafkaReceiver.class);
+
+   @KafkaListener(topics = "java-topic")
+   public void listen(@Payload String message){
+       logger.info("received message={}",message);
    }
+}

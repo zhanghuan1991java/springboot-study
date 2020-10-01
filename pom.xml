@@ -81,12 +81,32 @@
 			<version>1.2.62</version>
 		</dependency>
 
-		<!--集成zookeeper-->
+		<!--集成zookeeper3.4.5-->
 		<dependency>
 			<groupId>org.apache.zookeeper</groupId>
 			<artifactId>zookeeper</artifactId>
 			<version>3.5.5</version>
 		</dependency>
+
+		<!--使用 curator 来操作zookeeper  start-->
+		<dependency>
+			<groupId>org.apache.curator</groupId>
+			<artifactId>curator-framework</artifactId>
+			<version>2.12.0</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.curator</groupId>
+			<artifactId>curator-client</artifactId>
+			<version>2.12.0</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.curator</groupId>
+			<artifactId>curator-recipes</artifactId>
+			<version>2.12.0</version>
+		</dependency>
+		<!--使用 curator 来操作zookeeper  start-->
+
 
 		<!--集成常用工具类-->
 		<dependency>
