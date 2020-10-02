@@ -1,0 +1,12 @@
+1   引入依赖
+        <!--引入工具类 lombok , 方便bean的编写，log编写，但需要额外安装IDE插件lombok，
+		 实际项目中，若jdk升级频繁，禁止使用此工具类 -->
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<version>1.18.0</version>
+		</dependency>
+
+2   Bean 使用@Data  省略getter ,setter
+
+3   日志：@Slf4j  ，也支持其它的日志，及其他的注解见笔记
