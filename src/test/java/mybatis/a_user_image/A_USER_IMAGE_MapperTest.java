@@ -1,4 +1,4 @@
-package a_user_image;
+package mybatis.a_user_image;
 
 import com.didispace.Application;
 import com.didispace.mybatis.a_user_image.A_USER_IMAGE;

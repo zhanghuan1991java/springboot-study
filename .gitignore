@@ -2,4 +2,4 @@ target
 .idea
 .settings
 springboot-study.log
-springboot-study.log*
+*.log*
