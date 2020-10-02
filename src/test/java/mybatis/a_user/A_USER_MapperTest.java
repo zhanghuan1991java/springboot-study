@@ -1,3 +1,5 @@
+package mybatis.a_user;
+
 import com.didispace.Application;
 import com.didispace.mybatis.a_user.A_USER;
 import com.didispace.mybatis.a_user.A_USER_Mapper;

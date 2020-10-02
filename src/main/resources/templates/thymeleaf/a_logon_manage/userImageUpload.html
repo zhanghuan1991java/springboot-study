@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>用户图片上传界面</title>
+    <script src="/static/js/common_head.js"></script>
+
+</head>
+<body>
+<!--  从可视化布局粘贴出来的代码  start-->
+
+<div class="container-fluid">
+    <div class="row-fluid">
+        <div class="span12">
+            <div class="row-fluid">
+                <div class="span4">
+                </div>
+                <div class="span4">
+                    <div id = "showImage" >
+                        <image id="showFile"/>
+                    </div>
+                    <form class="form-search form-inline" method="post" enctype="multipart/form-data" action="/uploadImage">
+                        请选择图片：
+                        <input id="file" class="input-lg search-query" type="file" name="file"/>
+                        <button id="upload" class="btn btn-block btn-default" type="submit">上传</button>
+                    </form>
+
+                </div>
+                <div class="span4">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!--  从可视化布局粘贴出来的代码  end-->
+<script src="/static/js/common_footer.js"></script>
+
+<script type="text/javascript">
+    $(function(){
+        $("#file").on("change",function (data) {
+            //Chrome浏览器的写法，   不考虑其他浏览器
+            $('#showFile').attr("src",window.URL.createObjectURL($(this)[0].files.item(0)));
+        });
+
+        //上传按钮
+        // $("#upload").on("click",function (data) {
+        //     $.ajax({
+        //         url:"/uploadImage",
+        //         data:{},
+        //         async:false,
+        //         type:"POST",
+        //         success:function (data) {
+        //             window.location.href = '/user_register_html';
+        //         }
+        //     });
+        // });
+
+
+    });
+</script>
+
+</body>
+</html>

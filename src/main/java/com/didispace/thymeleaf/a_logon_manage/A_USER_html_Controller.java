@@ -9,8 +9,10 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,8 +28,8 @@ public class A_USER_html_Controller {
      * 用户管理主页面
      * @return
      */
-    @RequestMapping(value = "/userIndex")
-    public ModelAndView userIndex() {
+    @RequestMapping(value = "/index")
+    public ModelAndView index() {
         ModelAndView mv = new ModelAndView();
         mv.setViewName("/thymeleaf/a_logon_manage/userManage");
         return mv;
@@ -203,6 +205,12 @@ public class A_USER_html_Controller {
         return userList;
     }
 
+    /**
+     * 删除按钮
+     * @param id
+     * @param name
+     * @return
+     */
     @RequestMapping(value = "/deleteUser",method = RequestMethod.GET)
     public ModelAndView deleteUser(@RequestParam String id,String name) {
         logger.info("input params:————> id---"+ id +",name————>"+name);
@@ -216,4 +224,42 @@ public class A_USER_html_Controller {
         mv.setViewName("/thymeleaf/a_logon_manage/userManage");
         return mv;
     }
+
+    /**
+     * 跳转  到图片上传页面
+     * @return
+     */
+    @RequestMapping(value = "/upload_image_html/{id}")
+    public ModelAndView upload_image_html(@PathVariable("id") String id) {
+        logger.info("upload_image_html : ....用户id：" + id);
+        ModelAndView mv = new ModelAndView();
+        //用户id
+        mv.addObject("id",id);
+        mv.setViewName("/thymeleaf/a_logon_manage/userImageUpload");
+        return mv;
+    }
+
+    /**
+     * 图片上传
+     * @param file
+     * @return
+     */
+    @RequestMapping(value = "/uploadImage",method = RequestMethod.POST)
+    public ModelAndView uploadImage(@RequestParam("file") MultipartFile file ) throws IOException {
+
+        logger.info("input params:file ——>"+ file.getOriginalFilename());
+        byte[] content = file.getBytes();
+        System.out.println(content);
+
+
+
+        ModelAndView mv = new ModelAndView();
+
+        mv.setViewName("/thymeleaf/a_logon_manage/userManage");
+
+        return mv;
+    }
+
+
+
 }

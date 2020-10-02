@@ -1,3 +1,5 @@
+package mybatis.a_user;
+
 import com.didispace.Application;
 import org.apache.ibatis.exceptions.TooManyResultsException;
 import org.junit.Assert;
