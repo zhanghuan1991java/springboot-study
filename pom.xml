@@ -56,7 +56,13 @@
 			<artifactId>ojdbc8</artifactId>
 			<version>19.3.0.0</version>
 		</dependency>
-		
+
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<version>5.1.21</version>
+		</dependency>
+
 		<dependency>
 			<groupId>org.mybatis.spring.boot</groupId>
 			<artifactId>mybatis-spring-boot-starter</artifactId>
@@ -81,32 +87,23 @@
 			<version>1.2.62</version>
 		</dependency>
 
-		<!--集成zookeeper3.4.5-->
+		<!--集成zookeeper , curator      start-->
 		<dependency>
 			<groupId>org.apache.zookeeper</groupId>
 			<artifactId>zookeeper</artifactId>
-			<version>3.5.5</version>
+			<version>3.4.12</version>
 		</dependency>
-
-		<!--使用 curator 来操作zookeeper  start-->
 		<dependency>
 			<groupId>org.apache.curator</groupId>
 			<artifactId>curator-framework</artifactId>
-			<version>2.12.0</version>
+			<version>4.0.0</version>
 		</dependency>
-		<dependency>
-			<groupId>org.apache.curator</groupId>
-			<artifactId>curator-client</artifactId>
-			<version>2.12.0</version>
-		</dependency>
-
 		<dependency>
 			<groupId>org.apache.curator</groupId>
 			<artifactId>curator-recipes</artifactId>
-			<version>2.12.0</version>
+			<version>4.0.0</version>
 		</dependency>
-		<!--使用 curator 来操作zookeeper  start-->
-
+		<!--集成zookeeper , curator      end-->
 
 		<!--集成常用工具类-->
 		<dependency>
