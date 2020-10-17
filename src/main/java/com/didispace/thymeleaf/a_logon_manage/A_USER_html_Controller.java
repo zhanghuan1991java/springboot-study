@@ -3,27 +3,36 @@ package com.didispace.thymeleaf.a_logon_manage;
 import com.alibaba.fastjson.JSONObject;
 import com.didispace.mybatis.a_user.A_USER;
 import com.didispace.mybatis.a_user.A_USER_Mapper;
+import com.didispace.mybatis.a_user_image.A_USER_IMAGE;
+import com.didispace.mybatis.a_user_image.A_USER_IMAGE_Mapper;
 import com.didispace.mybatis.pageInfo.Page;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
+import oracle.sql.BLOB;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.io.IOException;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.*;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 @RestController
+@Slf4j
 public class A_USER_html_Controller {
-
-    Logger logger = LoggerFactory.getLogger(A_USER_html_Controller.class);
 
     @Autowired
     private A_USER_Mapper mapper;
-
+    
+    @Autowired
+    private A_USER_IMAGE_Mapper image_mapper;
+    
     /**
      * 用户管理主页面
      * @return
@@ -69,7 +78,7 @@ public class A_USER_html_Controller {
     public ModelAndView registerUserByForm(@ModelAttribute(value = "user") A_USER user) {
 
         int ret = mapper.insertUser(user);
-        logger.info("registerUserByForm -------newUser...新增条数:" +ret);
+        log.info("registerUserByForm -------newUser...新增条数:" +ret);
 
         //查询新增的用户信息到界面 start
         ModelAndView mv = queryUser("",new Page());
@@ -89,12 +98,12 @@ public class A_USER_html_Controller {
      */
     @RequestMapping(value = "/registerUserByJson",method = RequestMethod.POST)
     public ModelAndView registerUserByJson(@RequestBody String userStr) {
-        logger.info("user json str————>"+ userStr);
+        log.info("user json str————>"+ userStr);
 
         A_USER userObject = JSONObject.parseObject(userStr,A_USER.class);
 
         int ret = mapper.insertUser(userObject);
-        logger.info("registerUserByJson--------newUser...新增条数:" +ret);
+        log.info("registerUserByJson--------newUser...新增条数:" +ret);
 
         //查询新增的用户信息到界面 start
         ModelAndView mv = queryUser("",new Page());
@@ -111,7 +120,7 @@ public class A_USER_html_Controller {
      */
     @RequestMapping(value = "/queryUser")
     public ModelAndView queryUser(String searchId , Page page) {
-        logger.info(".........."+searchId);
+        log.info(".........."+searchId);
 
         ModelAndView mv = new ModelAndView();
 
@@ -139,7 +148,7 @@ public class A_USER_html_Controller {
     @RequestMapping(value = "/queryPageUser/{pageNum}")
     public ModelAndView queryPageUser(@PathVariable("pageNum") String pageNum) {
 
-        logger.info(".........."+pageNum);
+        log.info(".........."+pageNum);
 
         ModelAndView mv = new ModelAndView();
 
@@ -201,7 +210,7 @@ public class A_USER_html_Controller {
         mv.addObject("min",min);
         mv.addObject("max",max);
 
-        logger.info("pageIndex:"+pageIndex +",pageSize:"+pageSize + ",totalPage:"+totalPage +",min:"+min +",max:"+max);
+        log.info("pageIndex:"+pageIndex +",pageSize:"+pageSize + ",totalPage:"+totalPage +",min:"+min +",max:"+max);
         return userList;
     }
 
@@ -213,7 +222,7 @@ public class A_USER_html_Controller {
      */
     @RequestMapping(value = "/deleteUser",method = RequestMethod.GET)
     public ModelAndView deleteUser(@RequestParam String id,String name) {
-        logger.info("input params:————> id---"+ id +",name————>"+name);
+        log.info("input params:————> id---"+ id +",name————>"+name);
         mapper.deleteUserById(id);
 
         //查询新增的用户信息到界面 start
@@ -225,13 +234,17 @@ public class A_USER_html_Controller {
         return mv;
     }
 
+    /**************************************************************************************************************/
+    /**************************************************************************************************************/
+    /**************************************************************************************************************/
+
     /**
      * 跳转  到图片上传页面
      * @return
      */
     @RequestMapping(value = "/upload_image_html/{id}")
     public ModelAndView upload_image_html(@PathVariable("id") String id) {
-        logger.info("upload_image_html : ....用户id：" + id);
+        log.info("upload_image_html : ....用户id：" + id);
         ModelAndView mv = new ModelAndView();
         //用户id
         mv.addObject("id",id);
@@ -245,21 +258,44 @@ public class A_USER_html_Controller {
      * @return
      */
     @RequestMapping(value = "/uploadImage",method = RequestMethod.POST)
-    public ModelAndView uploadImage(@RequestParam("file") MultipartFile file ) throws IOException {
+    public ModelAndView uploadImage(@RequestParam("file") MultipartFile file , @RequestParam("user_id") String id) throws IOException {
+        String fileName = file.getOriginalFilename();
+        log.info("文件名称——>"+ fileName);
+        log.info("用户id  ——>" + id);
 
-        logger.info("input params:file ——>"+ file.getOriginalFilename());
         byte[] content = file.getBytes();
-        System.out.println(content);
+        A_USER_IMAGE a_user_image = new A_USER_IMAGE();
+        a_user_image.setImage(content);
+        a_user_image.setId(id);
+        image_mapper.insertUserImage(a_user_image);
 
-
-
+        //设置提示信息
         ModelAndView mv = new ModelAndView();
-
+        mv.addObject("retMsg", "用户["+id+"]上传图片["+fileName+"]成功!");
         mv.setViewName("/thymeleaf/a_logon_manage/userManage");
 
         return mv;
     }
 
+    @RequestMapping(value = "/getImage/{id}")
+    public void showImage(@PathVariable("id") String id,
+                          HttpServletResponse response, HttpServletRequest request)
+            throws ServletException, IOException, SQLException {
 
+        Map map = image_mapper.selectUserImage(id);
+
+        if (map != null && map.size() > 0) {
+            BLOB blob = (BLOB) map.get("IMAGE");
+            byte[] bytes = blob.getBytes(1L, (int) blob.length());
+
+            OutputStream out = new BufferedOutputStream(response.getOutputStream());
+            out.write(bytes);
+            out.flush();
+            out.close();
+        }
+
+
+
+    }
 
 }
