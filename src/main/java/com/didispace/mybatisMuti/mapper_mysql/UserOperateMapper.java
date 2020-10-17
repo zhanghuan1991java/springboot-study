@@ -1,13 +1,11 @@
 package com.didispace.mybatisMuti.mapper_mysql;
 
 import com.didispace.mybatisMuti.beans.UserOperate;
-import org.apache.ibatis.annotations.Mapper;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-@Service
-@Mapper
+@Repository
 public interface UserOperateMapper {
 
     List<UserOperate> getAllUserOperate();

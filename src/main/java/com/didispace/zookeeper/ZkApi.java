@@ -1,23 +1,19 @@
 package com.didispace.zookeeper;
 
+import lombok.extern.slf4j.Slf4j;
 import org.apache.zookeeper.*;
 import org.apache.zookeeper.data.Stat;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import javax.annotation.PostConstruct;
 import java.util.List;
 
-@Component
+//@Component
+@Slf4j
 public class ZkApi {
-
-    private static final Logger logger = LoggerFactory.getLogger(ZkApi.class);
 
     @Autowired
     private ZooKeeper zkClient;
-
 
     /**
      * 判断指定节点是否存在
@@ -29,7 +25,7 @@ public class ZkApi {
         try {
             return zkClient.exists(path,needWatch);
         } catch (Exception e) {
-            logger.error("【断指定节点是否存在异常】{},{}",path,e);
+            log.error("【断指定节点是否存在异常】{},{}",path,e);
             return null;
         }
     }
@@ -46,7 +42,7 @@ public class ZkApi {
         try {
             return zkClient.exists(path,watcher);
         } catch (Exception e) {
-            logger.error("【断指定节点是否存在异常】{},{}",path,e);
+            log.error("【断指定节点是否存在异常】{},{}",path,e);
             return null;
         }
     }
@@ -61,7 +57,7 @@ public class ZkApi {
             zkClient.create(path,data.getBytes(), ZooDefs.Ids.OPEN_ACL_UNSAFE, CreateMode.PERSISTENT);
             return true;
         } catch (Exception e) {
-            logger.error("【创建持久化节点异常】{},{},{}",path,data,e);
+            log.error("【创建持久化节点异常】{},{},{}",path,data,e);
             return false;
         }
     }
@@ -79,7 +75,7 @@ public class ZkApi {
             zkClient.setData(path,data.getBytes(),-1);
             return true;
         } catch (Exception e) {
-            logger.error("【修改持久化节点异常】{},{},{}",path,data,e);
+            log.error("【修改持久化节点异常】{},{},{}",path,data,e);
             return false;
         }
     }
@@ -94,7 +90,7 @@ public class ZkApi {
             zkClient.delete(path,-1);
             return true;
         } catch (Exception e) {
-            logger.error("【删除持久化节点异常】{},{}",path,e);
+            log.error("【删除持久化节点异常】{},{}",path,e);
             return false;
         }
     }
@@ -104,8 +100,7 @@ public class ZkApi {
       * @param path 父节点path
       */
     public List<String> getChildren(String path) throws KeeperException, InterruptedException{
-        List<String> list = zkClient.getChildren(path, false);
-        return list;
+        return zkClient.getChildren(path, false);
     }
 
     /**
