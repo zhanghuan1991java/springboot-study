@@ -1,6 +1,6 @@
 package mybatis.a_user_image;
 
-import com.didispace.Application;
+import com.didispace.App;
 import com.didispace.mybatis.a_user_image.A_USER_IMAGE;
 import com.didispace.mybatis.a_user_image.A_USER_IMAGE_Mapper;
 import lombok.extern.slf4j.Slf4j;
@@ -16,7 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.Map;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest(classes = Application.class)
+@SpringBootTest(classes = App.class)
 @Transactional
 @Rollback(false)
 @Slf4j

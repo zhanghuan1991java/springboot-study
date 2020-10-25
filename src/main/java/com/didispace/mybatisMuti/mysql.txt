@@ -1,0 +1,6 @@
+1   设置mysql 编码
+    show variables like '%char%';
+
+2   将非utf-8编码的改为utf-8
+
+    set character_set_client = utf8;

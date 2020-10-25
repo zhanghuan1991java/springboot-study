@@ -2,6 +2,7 @@ package com.didispace.mybatisMuti.mapper_mysql;
 
 import com.didispace.mybatisMuti.beans.UserOperateLog;
 import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.Select;
 import org.springframework.stereotype.Repository;
 
 @Repository

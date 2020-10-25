@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class TestExceptionController {
 	
-	@RequestMapping("/test")
+	@RequestMapping("/testException")
 	public  String testException() {
 		
 		int i = 1/0;

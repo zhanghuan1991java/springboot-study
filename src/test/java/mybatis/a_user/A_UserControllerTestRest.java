@@ -1,7 +1,6 @@
 package mybatis.a_user;
 
-import com.didispace.Application;
-import org.junit.Assert;
+import com.didispace.App;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +9,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.web.client.RestTemplate;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest(classes = Application.class)
+@SpringBootTest(classes = App.class)
 public class A_UserControllerTestRest {
     /**
      * 初始化的  RestTemplate  写在启动类 Application 中， 也可以用一个单独的配置类处理

@@ -1,6 +1,6 @@
 package mybatisMuti.mapper_mysql;
 
-import com.didispace.Application;
+import com.didispace.App;
 import com.didispace.mybatisMuti.beans.UserOperate;
 import com.didispace.mybatisMuti.mapper_mysql.UserOperateMapper;
 import lombok.extern.slf4j.Slf4j;
@@ -13,7 +13,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import java.util.List;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest(classes = Application.class)
+@SpringBootTest(classes = App.class)
 @Slf4j
 public class UserOperateMapperTest {
 

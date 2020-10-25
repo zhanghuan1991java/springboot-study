@@ -1,6 +1,6 @@
 package zookeeper;
 
-import com.didispace.Application;
+import com.didispace.App;
 import com.didispace.zookeeper.WatcherApi;
 import com.didispace.zookeeper.ZkApi;
 import org.apache.zookeeper.data.Stat;
@@ -15,7 +15,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest(classes = Application.class)
+@SpringBootTest(classes = App.class)
 @AutoConfigureMockMvc
 public class ZkApiTest {
     Logger logger = LoggerFactory.getLogger(ZkApiTest.class);

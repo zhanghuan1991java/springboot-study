@@ -1,6 +1,6 @@
 package mybatis.a_user;
 
-import com.didispace.Application;
+import com.didispace.App;
 import com.didispace.mybatis.a_user.A_USER;
 import com.didispace.mybatis.a_user.A_USER_Mapper;
 import com.didispace.mybatis.pageInfo.Page;
@@ -17,7 +17,7 @@ import java.util.List;
 
 
 @RunWith(SpringRunner.class)
-@SpringBootTest(classes = Application.class)
+@SpringBootTest(classes = App.class)
 @Transactional
 @Rollback(true)
 public class A_USER_MapperTest {

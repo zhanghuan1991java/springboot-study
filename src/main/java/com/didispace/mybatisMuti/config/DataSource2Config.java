@@ -10,11 +10,17 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.jdbc.DataSourceBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.io.Resource;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.core.io.support.ResourcePatternResolver;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 
 import javax.sql.DataSource;
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.URI;
+import java.net.URL;
 
 /**
  * Oracle数据源
@@ -22,7 +28,7 @@ import javax.sql.DataSource;
 @Slf4j
 @Configuration
 @MapperScan(basePackages = {"com.didispace.mybatis",
-                            "com.didispace.mybatisMuti.mapper_mysql"},
+                            "com.didispace.mybatisMuti.mapper_oracle"},
         sqlSessionTemplateRef  = "oracleSqlSessionTemplate")
 public class DataSource2Config {
 
@@ -38,7 +44,8 @@ public class DataSource2Config {
         bean.setDataSource(dataSource);
         ResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
         try {
-            bean.setMapperLocations(resolver.getResources("classpath:mybatis/mapper/*.xml"));
+            //配置目录层次类似的 mapper.xml文件:classpath:oracle_mapper/*/*.xml
+            bean.setMapperLocations(resolver.getResources("classpath:oracle_mapper/*.xml"));
             return bean.getObject();
         } catch (Exception e) {
             log.error("获取SqlSessionFactory异常",e);
