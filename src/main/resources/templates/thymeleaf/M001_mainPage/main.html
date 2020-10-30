@@ -52,7 +52,7 @@
                             <ul  th:class="${userManage_ret == null }?'hide':'breadcrumb'">
                                 <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
                                 <li th:each="menu,stat:${subMenu}">
-                                    <a th:id="${menu.menu_id}" th:href="@{${menu.menu_href}}" th:text="${menu.menu_text}"></a>
+                                    <a th:id="${menu.menu_id}" href="#" th:text="${menu.menu_text}"></a>
                                     <!--最后一个子菜单后，不显示斜线-->
                                     <span class="divider" th:if="${stat.last == false}">/</span>
                                 </li>
@@ -61,21 +61,16 @@
                     </div>
                     <!---子菜单  end -->
 
-                    <div class="row-fluid">
-                        <div class="span12">
-                            <iframe src="/user_register_html" frameborder="0" width="100%"  height="600" scrolling="auto"></iframe>
-                        </div>
-                    </div>
+                    <!--iframe 嵌入 HTML 显示-->
+                    <iframe id="container"  frameborder="0" width="100%"  height="1000" scrolling="auto"></iframe>
 
                 </div>
             </div>
+
         </div>
 
     </div>
 </div>
-
-
-
 
 <!--  从可视化布局粘贴出来的代码  end-->
 <script src="/static/js/common_footer.js"></script>
@@ -93,8 +88,14 @@
             $('#userManage').addClass('active');
         });
 
+        //由于是 js 动态生成的 子菜单 <a>标签，  需要使用这种方式才能添加click 事件
+        $("body").on('click','#M001_A001',function(){
+            $("#container").attr("src","/user_register_html")
+        });
 
-
+        $("body").on('click','#M001_A002',function(){
+            $("#container").attr("src","/userPage")
+        });
     });
 </script>
 

@@ -10,7 +10,7 @@ import java.util.List;
 @Repository
 public interface M000_menuMapper {
 
-    @Select("select m.menu_id,m.menu_text,m.menu_href,m.menu_order from menu m where m.parent_menu_id = #{parentMenuId}")
+    @Select("select m.menu_id,m.menu_text,m.menu_href,m.menu_order from a_menu m where m.parent_menu_id = #{parentMenuId}")
     public List<Menu> selectSubMenu(@Param("parentMenuId") String parentMenuId);
 
 }

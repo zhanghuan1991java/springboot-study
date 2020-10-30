@@ -5,15 +5,28 @@
     <title>用户注册界面</title>
 
     <script src="/static/js/common_head.js"></script>
-
+    <style type="text/css">
+        html body{
+            margin: 0px;
+            padding: 0px;
+            padding-left: 104px;
+        }
+        .hero-unit{
+            padding-left: 61px;
+            padding-top: 62px;
+            padding-right: 0px;
+        }
+    </style>
 </head>
 <body>
 
     <!--  从可视化布局粘贴出来的代码  start-->
     <div class="container-fluid">
         <div class="row-fluid">
-            <div class="span12">
+            <div class="span10">
                 <div class="row-fluid">
+
+
                     <div class="span6">
                         <div class="hero-unit">
                             <p>
@@ -31,9 +44,9 @@
                         </div>
                     </div>
                     <div class="span6">
-                        <h3 class="text-left">
+                        <!--<h3 class="text-left">
                             用户注册
-                        </h3>
+                        </h3>-->
                         <!-- 注意，若controller使用对象  接收  数据，   必须在  html标签 指定  对象，及  成员-->
                         <form class="form-horizontal" action="/registerUserByForm" method="post" th:object="${user}">
                             <div class="control-group">
@@ -66,12 +79,17 @@
                                     <input id="other_name" type="text" name="other_name"/>
                                 </div>
                             </div>
-                            <button class="btn btn-success" type="submit">注册1(form表单)</button>
-                            <button id="registerUser" class="btn btn-success">注册2(ajax拼接json)</button>
+
+                            <div class="control-group pull-right">
+                                <button class="btn btn-success" type="submit" style="padding-left:5px">注册1</button>
+                                <button id="registerUser" class="btn btn-success" style="margin:5px">注册2</button>
+                            </div>
+
                         </form>
 
 
                     </div>
+
                 </div>
             </div>
         </div>
