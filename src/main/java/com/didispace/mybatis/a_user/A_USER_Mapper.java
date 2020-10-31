@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public interface A_USER_Mapper {
+public interface A_USER_Mapper{
 
     public  A_USER selectUserById(@Param("id") String id);
 
@@ -20,4 +20,5 @@ public interface A_USER_Mapper {
     public Integer getCountNum();
 
     public void deleteUserById(@Param("id") String id);
+
 }

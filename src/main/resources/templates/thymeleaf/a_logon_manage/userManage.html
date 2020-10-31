@@ -1,6 +1,5 @@
 <!DOCTYPE html>
-<!--suppress ThymeleafVariablesResolveInspection -->
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html>
 <head>
     <meta charset="UTF-8">
     <title>用户管理界面</title>
@@ -9,6 +8,26 @@
         html body{
             margin: 0px;
             padding: 0px;
+        }
+
+        /*设置table样式，
+        1   单元格最大长度80，多余部分...显示
+        2   鼠标 触发hover 事件，显示完整内容
+        3   纯数字，也能显示出来，
+        */
+        table {
+            table-layout: auto;
+        }
+        table td{
+            max-width: 80px;
+            overflow: hidden;
+            text-overflow:ellipsis;
+            white-space: nowrap;
+            word-break: break-all;
+        }
+        table td:hover {
+            overflow: auto;
+            white-space: pre-wrap;
         }
     </style>
 </head>

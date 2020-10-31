@@ -31,8 +31,8 @@ public class A_USER_html_ControllerTest {
     private MockMvc mvc;
 
     @Test
-    public void testUserIndex() throws Exception {
-        int ret = mvc.perform(MockMvcRequestBuilders.get("/userIndex")).andReturn().getResponse().getStatus();
+    public void testIndex() throws Exception {
+        int ret = mvc.perform(MockMvcRequestBuilders.get("/index")).andReturn().getResponse().getStatus();
         logger.info("/userIndex 访问状态:"+ret);
         Assert.assertEquals("访问页面状态",200,ret);
     }

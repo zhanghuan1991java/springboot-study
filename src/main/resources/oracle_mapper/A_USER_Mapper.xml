@@ -39,7 +39,7 @@
 
     <insert id="insertUser" parameterType="com.didispace.mybatis.a_user.A_USER">
         insert into SYSTEM.A_USER(id,name,other_name,phone,addr,identity_code)
-        values (a_user_id.nextval,#{user.name,jdbcType=VARCHAR},#{user.other_name,jdbcType=VARCHAR},#{user.phone,jdbcType=VARCHAR},#{user.addr,jdbcType=VARCHAR},#{user.identity_code,jdbcType=VARCHAR})
+        values (#{user.id,jdbcType=VARCHAR},#{user.name,jdbcType=VARCHAR},#{user.other_name,jdbcType=VARCHAR},#{user.phone,jdbcType=VARCHAR},#{user.addr,jdbcType=VARCHAR},#{user.identity_code,jdbcType=VARCHAR})
     </insert>
 
     <!-- 分页公共头语句-->
@@ -49,6 +49,7 @@
     </sql>
 
     <!-- 分页公共尾语句-->
+    <!-- 此分页sql 可优化，  rownum < max 应放第二层，  第三层再控制 rownum > min  -->
     <sql id="pageTail">
          ) t) m
         where m.list &lt; #{page.max,jdbcType=INTEGER}

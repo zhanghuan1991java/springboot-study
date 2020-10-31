@@ -1,5 +1,6 @@
 package com.didispace.thymeleaf.a_logon_manage;
 
+import cn.hutool.core.util.IdUtil;
 import com.alibaba.fastjson.JSONObject;
 import com.didispace.mybatis.a_user.A_USER;
 import com.didispace.mybatis.a_user.A_USER_Mapper;
@@ -17,7 +18,9 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.*;
+import java.io.BufferedOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -76,7 +79,7 @@ public class A_USER_html_Controller {
      */
     @RequestMapping(value = "/registerUserByForm",method = RequestMethod.POST)
     public ModelAndView registerUserByForm(@ModelAttribute(value = "user") A_USER user) {
-
+        user.setId(IdUtil.fastUUID());
         int ret = mapper.insertUser(user);
         log.info("registerUserByForm -------newUser...新增条数:" +ret);
 
@@ -101,7 +104,7 @@ public class A_USER_html_Controller {
         log.info("user json str————>"+ userStr);
 
         A_USER userObject = JSONObject.parseObject(userStr,A_USER.class);
-
+        userObject.setId(IdUtil.fastUUID());
         int ret = mapper.insertUser(userObject);
         log.info("registerUserByJson--------newUser...新增条数:" +ret);
 
