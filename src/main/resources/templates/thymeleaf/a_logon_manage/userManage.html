@@ -1,63 +1,41 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
     <meta charset="UTF-8">
     <title>用户管理界面</title>
     <script src="/static/js/common_head.js"></script>
+    <style type="text/css">
+        html body{
+            margin: 0px;
+            padding: 0px;
+        }
+
+        /*设置table样式，
+        1   单元格最大长度80，多余部分...显示
+        2   鼠标 触发hover 事件，显示完整内容
+        3   纯数字，也能显示出来，
+        */
+        table {
+            table-layout: auto;
+        }
+        table td{
+            max-width: 80px;
+            overflow: hidden;
+            text-overflow:ellipsis;
+            white-space: nowrap;
+            word-break: break-all;
+        }
+        table td:hover {
+            overflow: auto;
+            white-space: pre-wrap;
+        }
+    </style>
 </head>
 <body>
 <!--  从可视化布局粘贴出来的代码  start-->
 <div class="container-fluid">
     <div class="row-fluid">
         <div class="span12">
-
-            <div class="navbar">
-                <div class="navbar-inner">
-                    <div class="container-fluid">
-                        <a data-target=".navbar-responsive-collapse" data-toggle="collapse" class="btn btn-navbar"><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></a> <a href="#" class="brand">JackZhanG</a>
-                        <div class="nav-collapse collapse navbar-responsive-collapse">
-                            <ul class="nav">
-                                <li class="active">
-                                    <a href="#">用户管理</a>
-                                </li>
-                                <li>
-                                    <a href="#">聊天室</a>
-                                </li>
-                                <li>
-                                    <a href="#">流量监控</a>
-                                </li>
-
-                            </ul>
-                            <ul class="nav pull-right">
-                                <li>
-                                    <a href="#">个人信息</a>
-                                </li>
-                                <li class="divider-vertical">
-                                </li>
-                                <li class="dropdown">
-                                    <a data-toggle="dropdown" class="dropdown-toggle" href="#">设置<strong class="caret"></strong></a>
-                                    <ul class="dropdown-menu">
-                                        <li>
-                                            <a href="#">下拉导航1</a>
-                                        </li>
-                                        <li>
-                                            <a href="#">下拉导航2</a>
-                                        </li>
-                                        <li>
-                                            <a href="#">其他</a>
-                                        </li>
-                                        <li class="divider">
-                                        </li>
-                                        <li>
-                                            <a href="#">链接3</a>
-                                        </li>
-                                    </ul>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
 
             <div id="userAlert" th:class="${retMsg == null }?'hide':'alert alert-success'">
                 <button type="button" class="close" data-dismiss="alert">×</button>
@@ -69,18 +47,9 @@
                 <div class="span12">
                     <form class="form-search" action="/queryUser">
                         <input id="searchId" name="searchId" class="input-lg search-query" type="text" />
-                        <button type="submit" class="btn btn-default">查询</button>
+                        <button id="searchBtn" type="submit" class="btn btn-default">查询</button>
                     </form>
 
-                    <div class="btn-group">
-                        <div class="btn-group" role="group" aria-label="...">
-                            <button type="button" class="btn btn-default" id="insert">新增</button>
-                            <a id="modal-684569" href="#modal-container-684569" role="button" class="btn" data-toggle="modal">弹框</a>
-                        </div>
-                    </div>
-                    <p>
-
-                    </p>
                     <table class="table table-bordered">
                         <thead>
                         <tr>
@@ -93,7 +62,6 @@
                             <th>身份证</th>
                             <th>创建时间</th>
                             <th>修改时间</th>
-                            <th>操作</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -109,11 +77,11 @@
                                 <td th:text="${user.identity_code}"></td>
                                 <td th:text="${user.create_time}"></td>
                                 <td th:text="${user.update_time}"></td>
-                                <td><a th:href="@{/deleteUser(id=${user.id},name=${user.name})}" class="del-btn">
+                                <!--<td><a th:href="@{/deleteUser(id=${user.id},name=${user.name})}" class="del-btn">
                                        <button type="button" class="btn btn-default">删除</button>
                                     </a>
-                                    <a class="btn btn-default" th:href="@{/upload_image_html/}+${user.id}" role="button">图片上传</a>
-                                </td>
+                                    <a class="btn btn-default" th:href="@{/upload_image_html/{id}(id=${user.id})}" role="button">图片上传</a>
+                                </td>-->
                             </tr>
                         </div>
                         <!--
@@ -161,32 +129,6 @@
                     </div>
                     <!--分页   pagination  end-->
 
-
-
-                    <!--遮罩窗体 start-->
-                    <div id="modal-container-684569" class="modal hide fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                            <h3 id="myModalLabel">
-                                标题栏
-                            </h3>
-                        </div>
-                        <div class="modal-body">
-                            <p>
-                                弹框测试...............
-                            </p>
-                        </div>
-                        <div class="modal-footer">
-                            <button class="btn" data-dismiss="modal" aria-hidden="true">关闭</button> <button class="btn btn-primary">保存</button>
-                        </div>
-                    </div>
-                    <!--遮罩窗体 end-->
-
-
-
-
-
-
                 </div>
             </div>
         </div>
@@ -195,23 +137,24 @@
 
 <!--  从可视化布局粘贴出来的代码  end-->
 <script src="/static/js/common_footer.js"></script>
-
 <script type="text/javascript">
     $(function(){
-        /*hide alert div*/
-        // $("#userAlert").addClass("hide");
 
-        //insert button  ajax跳转到注册页面
+        //ajax跳转到注册页面
         $('#insert').on('click',function () {
             $.ajax({
                 url:"/user_register_html",
-                // data:{},
                 async:false,
                 type:"POST",
                 success:function (data) {
                     window.location.href = '/user_register_html';
                 }
             });
+        });
+        
+        //记录用户操作
+        $('#searchBtn').on("click",function () {
+            report_data("testUser","userManage.html","click search btn");
         });
     });
 </script>

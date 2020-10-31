@@ -27,6 +27,8 @@ spring.kafka.consumer.auto-offset-reset=earliest
 spring.kafka.consumer.key-deserializer=org.apache.kafka.common.serialization.StringDeserializer
 spring.kafka.consumer.value-deserializer=org.apache.kafka.common.serialization.StringDeserializer
 
-
+------------------------------
+说明：
+    1 注释了，Component / Config  ... 注解，  使用kafka时需要解开
 
 

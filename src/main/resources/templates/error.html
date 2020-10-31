@@ -15,10 +15,14 @@
 					<div class="alert alert-error">
 						<button type="button" class="close" data-dismiss="alert">×</button>
 						<strong>警告!</strong>
+						<!--/*@thymesVar id="shortMsg" type="string"*/-->
 						<p th:text="${shortMsg}"></p>
 					</div>
 					<div class="hero-unit">
+
+						<!--/*@thymesVar id="exception" type="string"*/-->
 						<p th:text="${exception}"></p>
+
 					</div>
 				</div>
 			</div>

@@ -1,0 +1,21 @@
+1   编写interface
+
+    @Repository
+    public interface UserOperateLogMapper {
+
+        @Insert("insert into a_user_operate_log(id,user_id,oper_log) values(#{id},#{user_id},#{oper_log})")
+        int insertUserOperateLog(UserOperateLog userOperateLog);
+    }
+
+2   编写Mapper.xml(必须有映射文件)
+
+    <?xml version="1.0" encoding="UTF-8" ?>
+    <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+            "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    <mapper namespace="com.didispace.mybatisMuti.mapper_mysql.UserOperateLogMapper">
+
+    </mapper>
+
+3   复杂的Sql可以写在xml文件中
+
+说明：这里的配置不能与注解方式冲突，可以一部分SQL写在XML，一部分写在接口类中，不能两个地方同时写。

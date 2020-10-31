@@ -1,6 +1,6 @@
 package mybatis.a_user;
 
-import com.didispace.Application;
+import com.didispace.App;
 import org.apache.ibatis.exceptions.TooManyResultsException;
 import org.junit.Assert;
 import org.junit.Test;
@@ -17,10 +17,10 @@ import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest(classes = Application.class)
+@SpringBootTest(classes = App.class)
 @AutoConfigureMockMvc
-public class A_UserControllerTestMoc {
-    Logger logger = LoggerFactory.getLogger(A_UserControllerTestMoc.class);
+public class A_UserControllerTest_MocMVC {
+    Logger logger = LoggerFactory.getLogger(A_UserControllerTest_MocMVC.class);
     @Autowired
     private MockMvc mvc;
 

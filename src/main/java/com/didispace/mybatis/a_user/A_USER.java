@@ -1,6 +1,11 @@
 package com.didispace.mybatis.a_user;
 
-public class A_USER {
+import cn.hutool.core.util.StrUtil;
+import cn.hutool.json.JSONUtil;
+import lombok.Data;
+
+@Data
+public class A_USER{
 
     private String id;
     private String name;
@@ -11,81 +16,58 @@ public class A_USER {
     private String create_time;
     private String update_time;
 
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
     public String getName() {
+        return hideSensitiveMsg(name,1,1,1);
+    }
+    public String getPhone() {
+        return hideSensitiveMsg(phone,1,3,4);
+    }
+    public String getAddr() {
+        return hideSensitiveMsg(addr,1,2,4);
+    }
+    public String getIdentity_code() {
+        return hideSensitiveMsg(identity_code,2,4,8);
+    }
+
+
+    public String getRealName(){
         return name;
     }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getOther_name() {
-        return other_name;
-    }
-
-    public void setOther_name(String other_name) {
-        this.other_name = other_name;
-    }
-
-    public String getPhone() {
+    public String getRealPhone() {
         return phone;
     }
-
-    public void setPhone(String phone) {
-        this.phone = phone;
-    }
-
-    public String getAddr() {
+    public String getRealAddr() {
         return addr;
     }
-
-    public void setAddr(String addr) {
-        this.addr = addr;
-    }
-
-    public String getIdentity_code() {
+    public String getRealIdentity_code() {
         return identity_code;
     }
 
-    public void setIdentity_code(String identity_code) {
-        this.identity_code = identity_code;
+    /**
+     * 设置字段脱敏显示
+     * 保留 首尾 ，中间用 * 替代
+     */
+    private String hideSensitiveMsg(String info,int first,int last,int starCount) {
+        if(StrUtil.isEmpty(info)){
+            return "";
+        }
+
+        if(info.length() < Math.max(first,last)){
+            return info.substring(0,1)+"*";
+        }
+
+        String star = "";
+        for(int i =0 ; i < starCount ; i ++){
+            star+="*";
+        }
+
+        return info.substring(0,first)+star+info.substring(info.length()-last);
     }
 
-    public String getCreate_time() {
-        return create_time;
-    }
 
-    public void setCreate_time(String create_time) {
-        this.create_time = create_time;
-    }
-
-    public String getUpdate_time() {
-        return update_time;
-    }
-
-    public void setUpdate_time(String update_time) {
-        this.update_time = update_time;
-    }
 
     @Override
     public String toString() {
-        return "A_USER{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", other_name='" + other_name + '\'' +
-                ", phone='" + phone + '\'' +
-                ", addr='" + addr + '\'' +
-                ", identity_code='" + identity_code + '\'' +
-                ", create_time='" + create_time + '\'' +
-                ", update_time='" + update_time + '\'' +
-                '}';
+        return JSONUtil.parseObj(this).toStringPretty();
     }
 }

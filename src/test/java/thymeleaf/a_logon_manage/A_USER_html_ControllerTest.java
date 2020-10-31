@@ -1,16 +1,14 @@
 package thymeleaf.a_logon_manage;
 
 import com.alibaba.fastjson.JSON;
-import com.didispace.Application;
+import com.didispace.App;
 import com.didispace.mybatis.a_user.A_USER;
 import org.junit.Assert;
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.configurationprocessor.json.JSONObject;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
@@ -19,15 +17,9 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.util.LinkedMultiValueMap;
-import org.springframework.util.MultiValueMap;
-import org.springframework.web.client.RestTemplate;
-import org.springframework.web.context.WebApplicationContext;
-
-import static org.junit.Assert.*;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest(classes = Application.class)
+@SpringBootTest(classes = App.class)
 @AutoConfigureMockMvc
 @Transactional
 @Rollback(true)
@@ -39,8 +31,8 @@ public class A_USER_html_ControllerTest {
     private MockMvc mvc;
 
     @Test
-    public void testUserIndex() throws Exception {
-        int ret = mvc.perform(MockMvcRequestBuilders.get("/userIndex")).andReturn().getResponse().getStatus();
+    public void testIndex() throws Exception {
+        int ret = mvc.perform(MockMvcRequestBuilders.get("/index")).andReturn().getResponse().getStatus();
         logger.info("/userIndex 访问状态:"+ret);
         Assert.assertEquals("访问页面状态",200,ret);
     }

@@ -1,6 +1,7 @@
 package mybatis.a_user;
 
-import com.didispace.Application;
+import cn.hutool.core.util.IdUtil;
+import com.didispace.App;
 import com.didispace.mybatis.a_user.A_USER;
 import com.didispace.mybatis.a_user.A_USER_Mapper;
 import com.didispace.mybatis.pageInfo.Page;
@@ -17,17 +18,17 @@ import java.util.List;
 
 
 @RunWith(SpringRunner.class)
-@SpringBootTest(classes = Application.class)
+@SpringBootTest(classes = App.class)
 @Transactional
 @Rollback(true)
-public class A_USER_MapperTest {
+public class A_User_MapperTest {
 
     @Autowired
     private A_USER_Mapper mapper;
 
     @Test
     public void selectById() {
-        A_USER user = mapper.selectUserById("202008081520000100000");
+        A_USER user = mapper.selectUserById("b176c724-e95f-43e8-a6e1-4c9381893d30");
         Assert.assertNotNull(user);
     }
 
@@ -40,6 +41,7 @@ public class A_USER_MapperTest {
     @Test
     public void insertUser() {
         A_USER user = new A_USER();
+        user.setId(IdUtil.fastUUID());
         user.setName("李四");
         user.setOther_name("尼古拉斯");
         user.setPhone("13512341234");
@@ -66,6 +68,6 @@ public class A_USER_MapperTest {
     @Test
     public void deleteById() {
         mapper.deleteUserById("202008081520000100020");
-
     }
+
 }
