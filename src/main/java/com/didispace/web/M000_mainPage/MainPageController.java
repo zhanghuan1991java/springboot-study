@@ -6,12 +6,9 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -24,6 +21,7 @@ public class MainPageController {
 
     /**
      * 加载主页面
+     * 加载root 一级菜单  ， sql控制菜单顺序
      * @return
      */
     @RequestMapping(value = "/main")
@@ -34,11 +32,42 @@ public class MainPageController {
         return mv;
     }
 
+
+    /**
+     * 加载root 一级菜单  ， sql控制菜单顺序
+     * @return
+     */
+    @RequestMapping(value = "/rootMenu")
+    public ModelAndView rootMenu() {
+        ModelAndView mv = new ModelAndView();
+
+        //1 先从缓存中取， 若取不到，再查数据库 ，代码待完善
+
+        //2 从数据库查询root菜单
+        List<Menu> rootMenu = mapper.selectRootMenu();
+
+        //日志打印
+        rootMenu.stream()
+                .map(Menu::toStringPretty)
+                .forEach(log::info);
+
+        mv.addObject("rootMenu",rootMenu);
+        mv.setViewName("/thymeleaf/M001_mainPage/main::rootMenu");
+        return mv;
+    }
+
+    /**
+     * 加载 二级菜单  ， java代码控制菜单顺序
+     * @param parentMenuId
+     * @return
+     */
     @RequestMapping(value = "/subMenu/{id}")
     public ModelAndView subMenu(@PathVariable("id") String parentMenuId) {
         ModelAndView mv = new ModelAndView();
 
-        //从数据库查询子菜单
+        //1 先从缓存中取， 若取不到，再查数据库 ，代码待完善
+
+        //2 从数据库查询子菜单
         List<Menu> subMenu = mapper.selectSubMenu(parentMenuId)
                 .stream()
                 .sorted((o1, o2) -> o1.getMenu_order()-o2.getMenu_order())
