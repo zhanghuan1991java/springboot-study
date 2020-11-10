@@ -86,12 +86,18 @@
         $('body #rootMenu').on('click','a',function(){
             var id = $(this).attr('id');
             $('#subMenu').load("/subMenu/"+id);
+
+            //记录用户操作
+            report_data("testUser","/subMenu/"+id,"click root menu");
         });
 
         //3 给二级菜单绑定click事件
         $('body #subMenu').on('click','a',function(){
             var value = $(this).attr('value');
             $("#container").attr("src",value);
+
+            //记录用户操作
+            report_data("testUser",value,"click subMenu");
         });
         /********处理菜单  end ********/
 
