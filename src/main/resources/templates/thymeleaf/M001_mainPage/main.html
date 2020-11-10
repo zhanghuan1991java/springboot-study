@@ -1,8 +1,6 @@
 <!DOCTYPE html>
 <!--suppress ThymeleafVariablesResolveInspection -->
-<!--<html lang="en" xmlns:th="http://www.thymeleaf.org">-->
-<!--注释掉 namespace 便于查看 th标签-->
-<html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>主界面</title>
@@ -18,27 +16,29 @@
                 <div class="navbar-inner">
                     <div class="container-fluid">
                         <a data-target=".navbar-responsive-collapse" data-toggle="collapse" class="btn btn-navbar"><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></a> <a href="/main" class="brand">JackZhanG</a>
-                        <div class="nav-collapse collapse navbar-responsive-collapse">
-                            <ul class="nav">
-                                <li id="userManage">
+                        <div class="nav-collapse collapse navbar-responsive-collapse" id="rootMenu">
+                            <!--<ul class="nav">
+                                <li id="userManage" value="aaa">
                                     <a href="#">用户管理</a>
-
+                                </li>
+                                <li>
+                                    <a href="#" value="123456">链接</a>
                                 </li>
                                 <li>
                                     <a href="#">链接</a>
                                 </li>
-                                <li>
-                                    <a href="#">链接</a>
-                                </li>
+                            </ul>-->
 
+                            <!--root菜单-->
+                            <ul  class="nav" th:fragment="rootMenu">
+                                <li th:each="menu:${rootMenu}">
+                                    <a th:id="${menu.menu_id}" href="#" th:text="${menu.menu_text}" th:value="${menu.menu_href}" ></a>
+                                </li>
                             </ul>
-                            <ul class="nav pull-right">
-                                <li>
-                                    <a href="#">右边链接</a>
-                                </li>
-                                <li class="divider-vertical">
-                                </li>
 
+                            <!--root菜单  ，右侧菜单-->
+                            <ul class="nav pull-right">
+                                <li class="divider-vertical"></li>
                             </ul>
                         </div>
 
@@ -48,13 +48,13 @@
             </div>
             <div class="row-fluid">
                 <div class="span12">
-                    <!---子菜单处理 start -->
+                    <!---子菜单 start -->
                     <div class="row-fluid">
                         <div id="subMenu" class="span12" th:fragment="subMenu">
                             <ul  th:class="${userManage_ret == null }?'hide':'breadcrumb'">
                                 <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
                                 <li th:each="menu,stat:${subMenu}">
-                                    <a th:id="${menu.menu_id}" href="#" th:text="${menu.menu_text}"></a>
+                                    <a th:id="${menu.menu_id}" href="#" th:text="${menu.menu_text}" th:value="${menu.menu_href}" ></a>
                                     <!--最后一个子菜单后，不显示斜线-->
                                     <span class="divider" th:if="${stat.last == false}">/</span>
                                 </li>
@@ -78,9 +78,30 @@
 <script src="/static/js/common_footer.js"></script>
 <script type="text/javascript">
     $(function(){
+        /********处理菜单  start ********/
+        //1 加载 rootMenu
+        $('#rootMenu').load('/rootMenu');
+
+        //2 给rootMenu绑定click事件
+        $('body #rootMenu').on('click','a',function(){
+            var id = $(this).attr('id');
+            $('#subMenu').load("/subMenu/"+id);
+        });
+
+        //3 给二级菜单绑定click事件
+        $('body #subMenu').on('click','a',function(){
+            var value = $(this).attr('value');
+            $("#container").attr("src",value);
+        });
+        /********处理菜单  end ********/
+
+
+
+
+
 
         //点击用户管理时
-        $('#userManage').on('click',function(){
+        /*$('#userManage').on('click',function(){
             //加载子菜单
             $('#subMenu').load("/subMenu/M001");
 
@@ -88,16 +109,17 @@
             report_data("testUser","request /userManage/subMenu","click ,load subMenu");
 
             $('#userManage').addClass('active');
-        });
+        });*/
 
         //由于是 js 动态生成的 子菜单 <a>标签，  需要使用这种方式才能添加click 事件
-        $("body").on('click','#M001_A001',function(){
+        /*$("body").on('click','#M001_A001',function(){
             $("#container").attr("src","/user_register_html")
         });
 
         $("body").on('click','#M001_A002',function(){
             $("#container").attr("src","/userPage")
-        });
+        });*/
+
     });
 </script>
 
