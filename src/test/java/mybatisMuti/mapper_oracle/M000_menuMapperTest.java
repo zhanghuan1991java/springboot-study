@@ -23,12 +23,22 @@ public class M000_menuMapperTest {
 
     @Test
     public void testSelectSubMenu(){
-
         List<Menu> list = mapper.selectSubMenu("M001");
 
         list.stream().map(Menu::toStringPretty).forEach(log::info);
 
         Assert.assertNotNull(list);
-
     }
+
+    @Test
+    public void testSelectRootMenu(){
+        List<Menu> rootMenu = mapper.selectRootMenu();
+
+        rootMenu.stream()
+                .map(Menu::toStringPretty)
+                .forEach(log::info);
+
+        Assert.assertNotNull(rootMenu);
+    }
+
 }

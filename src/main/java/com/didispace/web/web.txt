@@ -1,5 +1,25 @@
-1、启动类上增加注解：@ServletComponentScan
+1   启动类上增加注解：@ServletComponentScan
 
-2、Filter、Listener、Servlet 分别对应增加注解：
+2   Filter、Listener、Servlet 分别对应增加注解：
 	@WebFilter("/*")、@WebListener、@WebServlet("/my")
-	
+
+3   注意  ： Listener  与 Filter 的顺序
+
+    先进 Listener , 再进 Filter , 进业务代码  ，出 Filter , 出 Listener
+
+    为了看到效果，故意将 日志添加额外字段，放在Filter中
+
+4   配置日志：
+
+    #彩色日志，拼接需要的数据
+    logging.pattern.console=${CONSOLE_LOG_PATTERN:%clr(%d{yyyy-MM-dd HH:mm:ss.SSS}){faint} %clr(${LOG_LEVEL_PATTERN:-%5p}) %clr(${PID:- }){magenta} %clr(---){faint} %clr([%15.15t]){faint} %clr(%-40.40logger{39}){cyan} %blue([%X]) %clr(:){faint} %m%n${LOG_EXCEPTION_CONVERSION_WORD:%wEx}}
+
+    # 1 纯黑色日志，无字段对齐，无样式
+    #logging.pattern.console=%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{50} [%X]: %msg%n
+
+    # 2 给纯黑色日志加颜色    %颜色()
+    #logging.pattern.console=%blue(%d{yyyy-MM-dd HH:mm:ss.SSS}) [%thread] %-5level %logger{50} %red([%X]): %msg%n
+
+    # 3  springboot  默认彩色日志
+    #logging.pattern.console=${CONSOLE_LOG_PATTERN:%clr(%d{yyyy-MM-dd HH:mm:ss.SSS}){faint} %clr(${LOG_LEVEL_PATTERN:-%5p}) %clr(${PID:- }){magenta} %clr(---){faint} %clr([%15.15t]){faint} %clr(%-40.40logger{39}){cyan} %clr(:){faint} %m%n${LOG_EXCEPTION_CONVERSION_WORD:%wEx}}
+

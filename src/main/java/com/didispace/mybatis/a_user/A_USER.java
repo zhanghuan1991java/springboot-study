@@ -15,7 +15,7 @@ public class A_USER{
     private String identity_code;
     private String create_time;
     private String update_time;
-
+/*
     public String getName() {
         return hideSensitiveMsg(name,1,1,1);
     }
@@ -41,28 +41,28 @@ public class A_USER{
     }
     public String getRealIdentity_code() {
         return identity_code;
-    }
+    }*/
 
     /**
      * 设置字段脱敏显示
      * 保留 首尾 ，中间用 * 替代
      */
-    private String hideSensitiveMsg(String info,int first,int last,int starCount) {
-        if(StrUtil.isEmpty(info)){
-            return "";
-        }
-
-        if(info.length() < Math.max(first,last)){
-            return info.substring(0,1)+"*";
-        }
-
-        String star = "";
-        for(int i =0 ; i < starCount ; i ++){
-            star+="*";
-        }
-
-        return info.substring(0,first)+star+info.substring(info.length()-last);
-    }
+//    private String hideSensitiveMsg(String info,int first,int last,int starCount) {
+//        if(StrUtil.isEmpty(info)){
+//            return "";
+//        }
+//
+//        if(info.length() < Math.max(first,last)){
+//            return info.substring(0,1)+"*";
+//        }
+//
+//        String star = "";
+//        for(int i =0 ; i < starCount ; i ++){
+//            star+="*";
+//        }
+//
+//        return info.substring(0,first)+star+info.substring(info.length()-last);
+//    }
 
 
 

@@ -28,7 +28,7 @@ public class A_USER_IMAGE_MapperTest {
     @Test
     public void insertUserImage(){
         A_USER_IMAGE a = new A_USER_IMAGE();
-        a.setId("123456");
+        a.setUser_id("123456");
         a.setImage("Hello Image".getBytes());
         int ret = mapper.insertUserImage(a);
         Assert.assertEquals("新增一条数据",1,ret);
@@ -36,7 +36,7 @@ public class A_USER_IMAGE_MapperTest {
 
     @Test
     public void selectUserImage(){
-        Map map = mapper.selectUserImage("202008081520000100186");
+        Map map = mapper.selectUserImage("25dfd04c-a123-4bea-a482-a0654709793a");
         Assert.assertNotNull(map);
     }
 }
