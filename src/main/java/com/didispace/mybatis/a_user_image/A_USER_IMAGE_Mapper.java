@@ -11,6 +11,6 @@ public interface A_USER_IMAGE_Mapper {
 
     public Integer insertUserImage(@Param("userImage") A_USER_IMAGE userImage);
 
-    @Select("select * from (select i.image from a_user_image i where i.id = #{id} order by i.create_time desc) where rownum=1")
-    public Map selectUserImage(String id);
+    @Select("select * from (select i.image from a_user_image i where i.user_id = #{user_id} order by i.create_time desc) where rownum=1")
+    public Map selectUserImage(String user_id);
 }

@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <title>用户管理界面</title>
     <script src="/static/js/common_head.js"></script>
+    <!-- 引入 Glyphicons 字体图标 -->
+    <link rel="stylesheet" href="/static/css/glyphicons.css">
     <style type="text/css">
         html body{
             margin: 0px;
@@ -25,7 +27,7 @@
             white-space: nowrap;
             word-break: break-all;
         }
-        table td:hover {
+        .showInfo:hover {
             overflow: auto;
             white-space: pre-wrap;
         }
@@ -62,26 +64,32 @@
                             <th>身份证</th>
                             <th>创建时间</th>
                             <th>修改时间</th>
+                            <th>操作</th>
                         </tr>
                         </thead>
                         <tbody>
 
                         <div th:each="user,stat:${userList}">
                             <tr th:class="${stat.odd}?'':'success'">
-                                <td th:text="${stat.index}+1"></td>
-                                <td th:text="${user.id}"></td>
-                                <td th:text="${user.name}"></td>
-                                <td th:text="${user.other_name}"></td>
-                                <td th:text="${user.phone}"></td>
-                                <td th:text="${user.addr}"></td>
-                                <td th:text="${user.identity_code}"></td>
-                                <td th:text="${user.create_time}"></td>
-                                <td th:text="${user.update_time}"></td>
-                                <!--<td><a th:href="@{/deleteUser(id=${user.id},name=${user.name})}" class="del-btn">
-                                       <button type="button" class="btn btn-default">删除</button>
+                                <td class="showInfo" th:text="${stat.index}+1"></td>
+                                <td class="showInfo" th:text="${user.id}"></td>
+                                <td class="showInfo" th:text="${user.name}"></td>
+                                <td class="showInfo" th:text="${user.other_name}"></td>
+                                <td class="showInfo" th:text="${user.phone}"></td>
+                                <td class="showInfo" th:text="${user.addr}"></td>
+                                <td class="showInfo" th:text="${user.identity_code}"></td>
+                                <td class="showInfo" th:text="${user.create_time}"></td>
+                                <td class="showInfo" th:text="${user.update_time}"></td>
+                                <td class="btn-group" role="group">
+                                    <!--删除-->
+                                    <a class="btn btn-default" th:href="@{/deleteUser(id=${user.id},name=${user.name})}">
+                                        <span class="glyphicon glyphicon-trash" aria-hidden="true"> </span>
                                     </a>
-                                    <a class="btn btn-default" th:href="@{/upload_image_html/{id}(id=${user.id})}" role="button">图片上传</a>
-                                </td>-->
+                                    <!--图片上传-->
+                                    <a class="btn btn-default" th:href="@{/upload_image_html/{id}(id=${user.id})}">
+                                        <span class="glyphicon glyphicon-upload" aria-hidden="true"> </span>
+                                    </a>
+                                </td>
                             </tr>
                         </div>
                         <!--

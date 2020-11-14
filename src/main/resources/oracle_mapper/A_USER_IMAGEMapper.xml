@@ -5,8 +5,8 @@
 
 
     <insert id="insertUserImage" parameterType="com.didispace.mybatis.a_user_image.A_USER_IMAGE">
-        insert into A_USER_IMAGE(id,IMAGE)
-        values (#{userImage.id,jdbcType=INTEGER},#{userImage.image,jdbcType=BLOB})
+        insert into A_USER_IMAGE(user_id,IMAGE)
+        values (#{userImage.user_id,jdbcType=INTEGER},#{userImage.image,jdbcType=BLOB})
     </insert>
 
 

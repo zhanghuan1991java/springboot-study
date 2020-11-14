@@ -65,15 +65,12 @@ public class MainPageController {
     public ModelAndView subMenu(@PathVariable("id") String parentMenuId) {
         ModelAndView mv = new ModelAndView();
 
-        //1 先从缓存中取， 若取不到，再查数据库 ，代码待完善
-
-        //2 从数据库查询子菜单
         List<Menu> subMenu = mapper.selectSubMenu(parentMenuId)
                 .stream()
+                .filter(t->{return  t.getIs_enable().equals("YES");})
                 .sorted((o1, o2) -> o1.getMenu_order()-o2.getMenu_order())
                 .collect(Collectors.toList());
 
-        //打印日志
         subMenu.stream().map(Menu::toStringPretty).forEach(log::info);
 
         mv.addObject("subMenu",subMenu);

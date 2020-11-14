@@ -1,6 +1,6 @@
 package thymeleaf.a_logon_manage;
 
-import com.alibaba.fastjson.JSON;
+import cn.hutool.json.JSONUtil;
 import com.didispace.App;
 import com.didispace.mybatis.a_user.A_USER;
 import org.junit.Assert;
@@ -73,7 +73,7 @@ public class A_USER_html_ControllerTest {
         user.setOther_name("小金");
         user.setAddr("秦国1");
         user.setPhone("0755-12345678");
-        String userStr = JSON.toJSONString(user);
+        String userStr = JSONUtil.parseObj(user).toString();
         int status = mvc.perform(MockMvcRequestBuilders
                 .post("/registerUserByJson")
                 .contentType(MediaType.APPLICATION_JSON)

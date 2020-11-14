@@ -1,0 +1,7 @@
+1 找到 bootstrap.css ,
+
+2 搜索 Glyphicons  ，
+
+3 只保留 与图标相关的css ,
+
+4 导入fonts 文件夹， 里面有图标。
