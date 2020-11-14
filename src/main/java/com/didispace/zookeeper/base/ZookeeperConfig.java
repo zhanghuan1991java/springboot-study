@@ -1,4 +1,4 @@
-package com.didispace.zookeeper;
+package com.didispace.zookeeper.base;
 
 import lombok.extern.slf4j.Slf4j;
 import org.apache.zookeeper.WatchedEvent;
@@ -24,17 +24,17 @@ public class ZookeeperConfig {
     public ZooKeeper zkClient(){
         ZooKeeper zooKeeper=null;
         try {
-//            final CountDownLatch countDownLatch = new CountDownLatch(1);
-//             zooKeeper = new ZooKeeper(connectString, timeout, new Watcher() {
-//                @Override
-//                public void process(WatchedEvent event) {
-//                    if(Event.KeeperState.SyncConnected==event.getState()){
-//                        countDownLatch.countDown();
-//                    }
-//                }
-//            });
-//            countDownLatch.await();
-//            log.info("【初始化ZooKeeper连接状态....】={}",zooKeeper.getState());
+            final CountDownLatch countDownLatch = new CountDownLatch(1);
+             zooKeeper = new ZooKeeper(connectString, timeout, new Watcher() {
+                @Override
+                public void process(WatchedEvent event) {
+                    if(Event.KeeperState.SyncConnected==event.getState()){
+                        countDownLatch.countDown();
+                    }
+                }
+            });
+            countDownLatch.await();
+            log.info("【初始化ZooKeeper连接状态....】={}",zooKeeper.getState());
 
         }catch (Exception e){
             log.error("初始化ZooKeeper连接异常....】={}",e);

@@ -1,4 +1,4 @@
-package com.didispace.zookeeper;
+package com.didispace.zookeeper.base;
 
 import lombok.extern.slf4j.Slf4j;
 import org.apache.zookeeper.WatchedEvent;
