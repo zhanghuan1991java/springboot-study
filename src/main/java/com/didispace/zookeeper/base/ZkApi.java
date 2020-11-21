@@ -1,10 +1,9 @@
-package com.didispace.zookeeper;
+package com.didispace.zookeeper.base;
 
 import lombok.extern.slf4j.Slf4j;
 import org.apache.zookeeper.*;
 import org.apache.zookeeper.data.Stat;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 
 import java.util.List;
 
@@ -108,7 +107,7 @@ public class ZkApi {
      * @param path
      * @return
      */
-    public  String getData(String path,Watcher watcher){
+    public  String getData(String path, Watcher watcher){
         try {
             Stat stat=new Stat();
             byte[] bytes=zkClient.getData(path,watcher,stat);

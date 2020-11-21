@@ -1,14 +1,13 @@
-package zookeeper;
+package zookeeper.base;
 
 import com.didispace.App;
-import com.didispace.zookeeper.WatcherApi;
-import com.didispace.zookeeper.ZkApi;
+import com.didispace.zookeeper.base.WatcherApi;
+import com.didispace.zookeeper.base.ZkApi;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.zookeeper.data.Stat;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -16,31 +15,30 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = App.class)
-@AutoConfigureMockMvc
+@Slf4j
 public class ZkApiTest {
-    Logger logger = LoggerFactory.getLogger(ZkApiTest.class);
 
     @Autowired
-    private  ZkApi zk;
+    private ZkApi zk;
 
     @Test
     public void testExist(){
         Stat stat = zk.exists("/zk",false);
-        logger.info("stat : " + stat.toString());
+        log.info("stat : " + stat.toString());
         Assert.assertNotNull(stat);
     }
 
     @Test
     public void testExist_2(){
         Stat stat = zk.exists("/zk",null);
-        logger.info("stat : " + stat.toString());
+        log.info("stat : " + stat.toString());
         Assert.assertNotNull(stat);
     }
 
     @Test
     public void testExist_3(){
         Stat stat = zk.exists("/zk",new WatcherApi());
-        logger.info("stat : " + stat.toString());
+        log.info("stat : " + stat.toString());
         Assert.assertNotNull(stat);
     }
 
@@ -59,14 +57,14 @@ public class ZkApiTest {
     @Test
     public void testUpdateNode(){
         boolean ret = zk.updateNode("/zkTest","update String by testUpdateNode");
-        logger.info("update status : " + ret);
+        log.info("update status : " + ret);
         Assert.assertTrue("update data success",ret);
     }
 
     @Test
     public void testDeleteNode(){
         boolean ret = zk.deleteNode("/zkTest");
-        logger.info("testDeleteNode status : " + ret);
+        log.info("testDeleteNode status : " + ret);
         Assert.assertTrue("delete node success",ret);
     }
 
