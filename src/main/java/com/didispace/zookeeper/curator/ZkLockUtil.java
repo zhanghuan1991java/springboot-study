@@ -10,13 +10,14 @@ import org.apache.zookeeper.CreateMode;
 import java.util.concurrent.CountDownLatch;
 
 @Slf4j
-public class  ZkLockUtil {
+public class ZkLockUtil {
     //分布式锁,用于挂起当前线程,等待上一把分布式锁释放
     private static CountDownLatch DISTRIBUTE_LOCK = new CountDownLatch(1);
     //分布式锁的总结点名
     private final static String ZK_LOCK_PROJECT = "zk-lock";
     //分布式锁节点名
     private final static String DISTRIBUTE_LOCK_NAME = "distribute-lock";
+
     /**
      * 获取分布式锁
      */
@@ -46,7 +47,7 @@ public class  ZkLockUtil {
     /**
      * 释放锁资源
      */
-    public static void  release(String path) {
+    public static void release(String path) {
         CuratorFramework client = ZkClientUtil.build();
         client.start();
         try {
@@ -76,7 +77,7 @@ public class  ZkLockUtil {
                     log.info("上一会话已释放锁或会话已断开...节点路径为:" + nodePath);
                     if (nodePath.contains(DISTRIBUTE_LOCK_NAME)) {
                         DISTRIBUTE_LOCK.countDown();
-                        log.info("释放计数器,计数器值为:"+DISTRIBUTE_LOCK.getCount()+"让当前请求来获取分布式锁...");
+                        log.info("释放计数器,计数器值为:" + DISTRIBUTE_LOCK.getCount() + "让当前请求来获取分布式锁...");
                     }
                 }
             }

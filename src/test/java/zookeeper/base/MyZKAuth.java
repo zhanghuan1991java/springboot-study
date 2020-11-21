@@ -1,4 +1,4 @@
-package zookeeper;
+package zookeeper.base;
 
 import cn.hutool.core.util.StrUtil;
 import lombok.extern.slf4j.Slf4j;

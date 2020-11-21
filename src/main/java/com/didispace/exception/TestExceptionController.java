@@ -8,9 +8,9 @@ public class TestExceptionController {
 	
 	@RequestMapping("/testException")
 	public  String testException() {
-		
+
 		int i = 1/0;
-		
+
 		return "";
 	}
 }

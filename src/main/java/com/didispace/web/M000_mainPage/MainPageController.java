@@ -79,4 +79,12 @@ public class MainPageController {
         mv.setViewName("/thymeleaf/M001_mainPage/main::subMenu");
         return mv;
     }
+
+
+    @RequestMapping(value = "/excel")
+    public ModelAndView testHtml() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("/excel");
+        return mv;
+    }
 }

@@ -1,4 +1,4 @@
-package zookeeper;
+package zookeeper.base;
 
 import cn.hutool.core.util.IdUtil;
 import cn.hutool.json.JSONObject;
