@@ -90,7 +90,7 @@ public class CuratorBase {
 		executor.shutdown();
 
 		//10、清空nameSpace下的所有节点
-        clearNode(cf, "/");
+//        clearNode(cf, "/");
     }
 
     /**
