@@ -58,7 +58,7 @@ public class CuratorDistributedBarrier {
                      * Error Handling
                      * DistributedBarrier instances watch for connection loss and will throw an exception from waitOnBarrier().
                      */
-                    DistributedBarrier barrier = new DistributedBarrier(cf, "/barrier");
+                    barrier = new DistributedBarrier(cf, "/barrier");
                     log.info(Thread.currentThread().getName() + " set barrier!");
 
                     //设置
