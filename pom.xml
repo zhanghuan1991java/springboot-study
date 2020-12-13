@@ -153,13 +153,22 @@
 			<artifactId>spring-kafka</artifactId>
 		</dependency>
 
+		<!--集成Shiro-->
+		<dependency>
+			<groupId>org.apache.shiro</groupId>
+			<artifactId>shiro-spring</artifactId>
+			<version>1.4.0</version>
+		</dependency>
+
 		<!--引入工具类 lombok , 方便bean的编写，log编写，但需要额外安装IDE插件lombok，
-		 实际项目中，若jdk升级频繁，禁止使用此工具类 -->
+		 实际项目中，若jdk升级频繁（特指升级JDK11），禁止使用此工具类 -->
 		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
 			<version>1.18.0</version>
 		</dependency>
+
+
 
     </dependencies>
 	

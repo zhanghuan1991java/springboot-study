@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>用户登录界面</title>
+
+    <script src="/static/js/common_head.js"></script>
+   <!-- <style type="text/css">
+        html body{
+            margin: 0px;
+            padding: 0px;
+            padding-left: 104px;
+        }
+        .hero-unit{
+            padding-left: 61px;
+            padding-top: 62px;
+            padding-right: 0px;
+        }
+    </style>-->
+</head>
+<body>
+
+    <!--  从可视化布局粘贴出来的代码  start-->
+    <div class="container-fluid">
+        <div class="row-fluid">
+            <div class="span10">
+                <div class="row-fluid">
+
+
+                    <div class="span6">
+                        <div class="hero-unit">
+                            <p>
+                                一种风，只流浪在一座山谷；
+                            </p>
+                            <p>
+                                一道堤，只护住一湾星河。
+                            </p>
+                            <p>
+                                每次仰望星空，我总是闭上眼，
+                            </p>
+                            <p>
+                                因为最美的一颗不在天上。
+                            </p>
+                        </div>
+                    </div>
+                    <div class="span6">
+                        <h3 class="text-left">
+                            用户登录
+                        </h3>
+                        <div id="userAlert" th:class="${retMsg == null }?'hide':'alert alert-success'">
+                            <button type="button" class="close" data-dismiss="alert">×</button>
+                            <strong>提示!</strong>
+                            <p th:text="${retMsg}"></p>
+                        </div>
+                        <!-- 注意，若controller使用对象  接收  数据，   必须在  html标签 指定  对象，及  成员-->
+                        <form class="form-horizontal"  action="/loginIn" method="post">
+                            <div class="control-group">
+                                <label class="control-label" for="name" >用户名</label>
+                                <div class="controls">
+                                    <input id="name" type="text" name="name"/>
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <label class="control-label" for="passwd" >密码</label>
+                                <div class="controls">
+                                    <input id="passwd" type="password" name="passwd"/>
+                                </div>
+                            </div>
+
+
+                            <div class="control-group pull-right">
+                                <button id="login" class="btn btn-success" type="submit">登录</button>
+                            </div>
+
+                        </form>
+
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--  从可视化布局粘贴出来的代码  end-->
+    <script src="/static/js/common_footer.js"></script>
+
+    <script type="text/javascript">
+        /*$(function () {
+
+            $('#login').on('click',function () {
+                $.ajax({
+                    url:"/loginIn",
+                    data:{
+                        name:$('#name').val(),
+                        passwd:$('#passwd').val()
+                        },
+                    async:false,
+                    contentType: "application/json",
+                    type:"POST",
+                    success:function (data) {
+                    }
+                });
+            });
+
+        });*/
+
+    </script>
+
+
+</body>
+</html>
