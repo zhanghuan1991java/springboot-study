@@ -28,11 +28,16 @@ public class ShiroConfig {
          *      role : 必须得到角色才能访问
          */
         Map<String, String> filterMap = new LinkedHashMap<>();
-        filterMap.put("/main","authc");
+        filterMap.put("/user_register_html","authc");//新增  需要登录
 
+        filterMap.put("/deleteUser","perms[user:delete]");//修改 需要授权
         factoryBean.setFilterChainDefinitionMap(filterMap);
 
+        //未认证，则跳转登录页面
         factoryBean.setLoginUrl("/login");
+
+        //未授权，跳转页面
+        factoryBean.setUnauthorizedUrl("/login");
 
         return factoryBean;
     }

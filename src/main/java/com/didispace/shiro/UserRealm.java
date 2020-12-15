@@ -1,14 +1,16 @@
 package com.didispace.shiro;
 
 
-import cn.hutool.core.util.StrUtil;
 import com.didispace.mybatis.a_user.A_USER;
 import com.didispace.mybatis.a_user.A_USER_Mapper;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;
+import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
+import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**
@@ -26,8 +28,14 @@ public class UserRealm extends AuthorizingRealm {
      */
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
-        log.info("执行授权逻辑...");
-        return null;
+        log.info("执行授权逻辑..." + principals.toString());
+        SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
+//        info.addStringPermission("user:delete");
+
+        Subject subject = SecurityUtils.getSubject();
+        String userId = (String) subject.getPrincipal();
+        log.info("userId ... ,{}" ,userId);
+        return info;
     }
 
     /**
@@ -54,6 +62,6 @@ public class UserRealm extends AuthorizingRealm {
          * 暂时使用 ：  id 做用户名， phone 做密码
          */
 
-        return new SimpleAuthenticationInfo("",dbUser.getPhone(),"");
+        return new SimpleAuthenticationInfo(userId,dbUser.getPhone(),"");
     }
 }
